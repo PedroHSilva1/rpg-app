@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, View, Text, StyleSheet } from "react-native";
 import Card from "../components/Card";
 
-export default function AnotherScreen() {
+export default function Deities() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       

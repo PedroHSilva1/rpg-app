@@ -4,8 +4,12 @@ import { View, Text, Image, StyleSheet } from "react-native";
 export default function Card({ title, image, description }) {
   return (
     <View style={styles.card}>
-      <Image source={image} style={styles.image} />
       <Text style={styles.title}>{title}</Text>
+      <Image
+        source={typeof image === "string" ? { uri: image } : image}
+        style={styles.image}
+        resizeMode="contain"
+      />
       <Text style={styles.description}>{description}</Text>
     </View>
   );
@@ -23,17 +27,17 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
-  image: {
-    width: "100%",
-    height: 150,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
   title: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 8,
     color: "#ffffff",
+  },
+  image: {
+    width: "100%",
+    height: 200,
+    borderRadius: 8,
+    marginBottom: 8,
   },
   description: {
     fontSize: 14,

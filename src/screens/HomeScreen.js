@@ -5,17 +5,11 @@ import Card from "../components/Card";
 export default function HomeScreen() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Destaques</Text>
-      <Card
-        title="Dyah - Ceifadora do Norte"
-        image={{ uri: "https://via.placeholder.com/300" }}
-        description="Dyah é uma entidade poderosa que reina sobre o norte. Sua história está envolta em mistérios."
-      />
-      <Card
-        title="Outra Criatura"
-        image={{ uri: "https://via.placeholder.com/300" }}
-        description="Descrição de outra criatura ou divindade do RPG."
-      />
+      <Text style={styles.title}>Algumas informações</Text>
+      <Text style={styles.text}>Olá. Este é um protótipo de 
+        um dociê para RPG. Para acessar as demais abas, pressione no 
+        icone no canto superior do seu smartphone.
+      </Text>
     </ScrollView>
   );
 }
@@ -28,6 +22,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 16,
+    color: "#ffffff",
+  },
+  text: {
+    fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 16,

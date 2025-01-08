@@ -4,9 +4,9 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 // Importando as telas
 import HomeScreen from "./src/screens/HomeScreen";
-import AnotherScreen from "./src/screens/AnotherScreen";
+import Highlight from "./src/screens/Highlight";
 import CreaturesScreen from "./src/screens/CreaturesScreen";
-import HomeTScreen from "./src/screens/HomeTScreen";
+import Deities from "./src/screens/Deities";
 
 const Drawer = createDrawerNavigator();
 
@@ -22,9 +22,9 @@ export default function App() {
           drawerActiveTintColor: "#bb86fc",
         }}
       >
-        <Drawer.Screen name="Inicio" component={HomeTScreen} />
-        <Drawer.Screen name="Destaques" component={HomeScreen} />
-        <Drawer.Screen name="Pessoas" component={AnotherScreen} />
+        <Drawer.Screen name="Inicio" component={HomeScreen} />
+        <Drawer.Screen name="Destaques" component={Highlight} />
+        <Drawer.Screen name="Divindades" component={Deities} />
         <Drawer.Screen name="Criaturas" component={CreaturesScreen} />
       </Drawer.Navigator>
     </NavigationContainer>

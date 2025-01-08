@@ -1,3 +1,5 @@
+import { Link } from "@react-navigation/native";
+
 export const creatures = [
     {
       id: 1,
@@ -5,7 +7,7 @@ export const creatures = [
       tipo: "Hostil",
       localidade: "Reino de Amélia",
       descricao: "Uma criatura feroz que aparece nas noites de lua cheia.",
-      
+      image: require("../assets/Images/lobisomem.jpg"),
     },
     {
       id: 2,
@@ -13,14 +15,15 @@ export const creatures = [
       tipo: "Aliado",
       localidade: "Floresta Encantada",
       descricao: "Uma criatura mágica que ajuda viajantes perdidos.",
-      
+      image: require("../assets/Images/fada.jpg"),
     },
     {
         id: 3,
-        nome: "carniçal da madeira",
+        nome: "Carniçal da Madeira",
         tipo: "Hostil",
         localidade: "Floresta Amaldiçoada",
-        descricao: "Uma criatura parasita. Reside nas cascas de árvores, sugando sua energia como alimento",
+        descricao: "Uma criatura parasita. Reside nas cascas de árvores, sugando sua energia como alimento.",
       },
   ];
+  
   

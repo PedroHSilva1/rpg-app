@@ -39,19 +39,17 @@ Isso abrirá o Expo Developer Tools no seu navegador. A partir daí, você pode:
 rpg-app
 ├── App.js
 ├── src
-│   ├── assets
-│   │   └── images
-│   │       ├── lobisomem.jpg
-│   │       └── fada.jpg
-│   ├── components
-│   │   └── Card.js
-│   ├── data
-│   │   └── creatures.js
-│   └── screens
-│       ├── HomeScreen.js
-│       ├── AnotherScreen.js
-│       └── CreaturesScreen.js
-└── README.md
+    ├── components
+    │   └── Card.js
+    ├── data
+    │   └── creatures.js
+    ├── assets
+    │   └── images
+    └── screens
+        ├── HomeScreen.js
+        ├── Highlight.js
+        ├── CreaturesScreen.js
+        └── Deities.js
 ```
 
 ## 🛠 Tecnologias utilizadas
