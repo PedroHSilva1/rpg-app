@@ -38,7 +38,8 @@ Isso abrirá o Expo Developer Tools no seu navegador. A partir daí, você pode:
 ```plaintext
 rpg-app
 ├── App.js
-├── src
+├── Index.js
+└── src
     ├── components
     │   └── Card.js
     ├── data
