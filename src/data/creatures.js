@@ -7,7 +7,7 @@ export const creatures = [
       tipo: "Hostil",
       localidade: "Reino de Amélia",
       descricao: "Uma criatura feroz que aparece nas noites de lua cheia.",
-      image: require("../assets/images/lobisomem.jpg"),
+      image: require("../assets/Images/lobisomem.jpg"),
     },
     {
       id: 2,
@@ -15,7 +15,7 @@ export const creatures = [
       tipo: "Aliado",
       localidade: "Floresta Encantada",
       descricao: "Uma criatura mágica que ajuda viajantes perdidos.",
-      image: require("../assets/images/fada.jpg"),
+      image: require("../assets/Images/fada.jpg"),
     },
     {
         id: 3,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import Card from '../components/Card';
-import { classes } from '../data/classesData';  // Importação Corrigida
+import { classes } from '../data/classesData'; 
 
 export default function ClassSelectionScreen({ navigation }) {
   return (
@@ -12,7 +12,7 @@ export default function ClassSelectionScreen({ navigation }) {
           key={index}
           onPress={() => navigation.navigate('RaceSelectionScreen', { selectedClass: item })}
         >
-          <Card title={item.nome} image={item.image} description={item.descricao} />  {/* Propriedades Corrigidas */}
+          <Card title={item.nome} image={item.image} description={item.descricao} />  
         </TouchableOpacity>
       ))}
     </ScrollView>
