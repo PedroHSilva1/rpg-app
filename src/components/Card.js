@@ -1,9 +1,12 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 
-export default function Card({ title, image, description }) {
+export default function Card({ title, image, description, onPress }) {
+  // Se a função onPress existir, use o Pressable; caso contrário, apenas o View
+  const CardComponent = onPress ? Pressable : View;
+
   return (
-    <View style={styles.card}>
+    <CardComponent onPress={onPress} style={styles.card}>
       <Text style={styles.title}>{title}</Text>
       <Image
         source={typeof image === "string" ? { uri: image } : image}
@@ -11,7 +14,7 @@ export default function Card({ title, image, description }) {
         resizeMode="contain"
       />
       <Text style={styles.description}>{description}</Text>
-    </View>
+    </CardComponent>
   );
 }
 
