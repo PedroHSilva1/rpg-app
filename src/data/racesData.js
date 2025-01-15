@@ -26,6 +26,30 @@ export const races = [
      
     },
     {
+      id:201,
+      nome:"Elfo da Floresta",
+      descricao:` Como um elfo da floresta, você possui sentidos e intuição aguçados, seus pés ágeis guiam-no rápida e furtivamente através de suas florestas nativas.
+      
+  Os elfos da floresta (também chamados de elfos selvagens, elfos verdes ou elfos do bosque) são reclusos e desconfiados dos não elfos.
+
+  A pele dos elfos da floresta tende a ser de matiz cobreada, algumas vezes com traços esverdeados. Seu cabelo geralmente é castanho ou negro, mas ocasionalmente podem ser loiros ou cor de cobre. Seus olhos são verdes, castanhos ou cor de avelã. `,
+      subRaceOf:2,
+      traits: ["Máscara da Natureza","Pés Ligeiros"]
+    },
+    {
+      id:202,
+      nome:"Elfo Negro (Drow)",
+      descricao:` Descendentes de uma antiga sub-raça de elfos de pele negra, os drow foram banidos da superfície do mundo por seguirem a deusa Lolth pelo caminho do mal e corrupção.
+
+Agora, eles construíram sua própria civilização nas profundezas do Subterrâneo, moldados pelo Caminho de Lolth.
+      
+Também conhecidos como elfos negros, os drow possuem pele negra similar a obsidiana polida e cabelos brancos opacos ou amarelo pálido.
+      
+Normalmente eles possuem olhos muito pálidos (tão pálidos que são confundidos com olhos brancos) com tons de lilás, prata, rosa, vermelho e azul. Eles costumam ser menores e mais magros que a maioria dos elfos. Aventureiros drow são raros e a raça não existe em todo o mundo. Verifique com seu Mestre se a raça drow está disponível como personagem de jogador. `,
+      subRaceOf:2,
+      traits: ["Sensibilidade à Luz Solar","Magia Drow"]
+    },
+    {
       id: 3,
       nome: "Anão",
       image: require("../assets/Images/racesImages/anao.jpg"),
@@ -33,6 +57,22 @@ export const races = [
       
   O que começa como uma busca por vingança de um único anão, pode se tornar a ambição de todo um clã. `,
       traits: ["Visão no Escuro", "Graça Élfica"],
+     
+    },
+    {
+      id: 301,
+      nome: "Anão da Colina",
+      descricao: ` Como um anão da colina, você tem sentidos aguçados, maior intuição e notável resiliência. `,
+      subRaceOf:3,
+      traits: ["Tenacidade Anã"],
+     
+    },
+    {
+      id: 302,
+      nome: "Anão da Montanha",
+      descricao: `Como um anão da montanha, você é forte e resistente, acostumados a uma vida difícil em terrenos difíceis. Você, provavelmente tem a descendência daqueles mais altos (para um anão) e tende a possuir uma coloração mais clara. `,
+      subRaceOf:3,
+      traits: ["Treinamento Anão com Armaduras"],
      
     },
     {
@@ -45,6 +85,24 @@ export const races = [
 
   Mas mesmo esses halflings andarilhos amam a paz, a comida, uma lareira e um lar, mesmo que o lar seja em uma carruagem, empurrada ao longo de uma estrada de terra, ou uma balsa flutuando rio abaixo. `,
       traits: ["Visão no Escuro", "Graça Élfica"],
+     
+    },
+    {
+      id:401 ,
+      nome: "Pés Leves",
+      descricao: `  Como um halfling pés-leves, você pode esconder-se facilmente, mesmo usando apenas outras pessoas como cobertura. Você geralmente é afável e se dá muito bem com os outros. Nos Reinos Esquecidos, os halflings pésleves espalharam-se até os lugares mais distantes e são a variedade mais comum.
+
+  Pés-leves são mais propensos à vontade de viajar do que os outros halflings, e muitas vezes vivem ao lado de outras raças ou levam uma vida nômade. No mundo de Greyhawk, estes halflings são chamados pés-peludos ou companheiros altos. `,
+      subRaceOf:4,
+      traits: ["Furtividade Natural"],
+     
+    },
+    {
+      id:402 ,
+      nome: "Robusto",
+      descricao: `Um halfling robustos é mais resistente do que a média de sua raça e possui certa resistência aos venenos. Alguns dizem que os robustos têm sangue dos anões.`,
+      subRaceOf:4,
+      traits: ["Resiliência dos Robustos"],
      
     },
     {
@@ -69,6 +127,27 @@ export const races = [
 
   Gnomos regozijam a vida, apreciando cada momento de invento, exploração, investigação, criação e brincadeira. `,
       traits: ["Visão no Escuro", "Graça Élfica"],
+     
+    },
+    {
+      id:601 ,
+      nome: "Gnomo da Floresta",
+      descricao: `Como um gnomo da floresta, você possui um traquejo natural com ilusões e velocidade e furtividade naturais.
+      
+Gnomos da floresta são raros e reservados. Eles vivem em comunidades escondidas em florestas silvestres, usando suas ilusões e truques para se
+      esconderem das ameaças ou para mascarar sua fuga antes de serem detectados.
+
+ Gnomos da floresta tendem a ser amigáveis com outros povos da floresta espirituosos e eles tem nos elfos e fadas bondosas como seus mais importantes aliados. Os gnomos também fazem amizade com pequenos animais silvestres e contam com eles para obter informações sobre ameaças que estejam perambulando por suas terras. `,
+      subRaceOf:6,
+      traits: ["Ilusionista Nato","Falar com Bestas Pequenas"],
+     
+    },
+    {
+      id:602 ,
+      nome: "Gnomo das Rochas",
+      descricao: `Como um gnomo das rochas, você possui uma inventividade e resistência naturais acima dos outros gnomos. A maioria dos gnomos são gnomos das rochas`,
+      subRaceOf:6,
+      traits: ["Conhecimento de Artífice","Engenhoqueiro"],
      
     },
     {
