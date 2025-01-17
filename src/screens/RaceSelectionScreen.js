@@ -60,7 +60,7 @@ export default function RaceSelectionScreen({ route, navigation }) {
             selectedRace ? handleSubRaceSelection(item) : handleRaceSelection(item)
           }
         >
-          <Card title={item.nome} description={item.descricao} />
+          <Card title={item.nome} description={item.descricao} image={item.image}/>
         </TouchableOpacity>
       ))}
 

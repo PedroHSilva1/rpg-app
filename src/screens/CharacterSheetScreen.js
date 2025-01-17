@@ -7,11 +7,14 @@ export default function CharacterSheetScreen({ route }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Ficha do Personagem</Text>
-      <Text style={styles.info}>Classe: {selectedClass.name}</Text>
       <Text style={styles.info}>Raça: {selectedRace.nome}</Text>
+      <Text style={styles.info}>Características da raça: {selectedRace.traits} </Text>
+      
+      <Text style={styles.info}>Classe: {selectedClass.nome}</Text>
       <Text style={styles.info}>
         Sub-Raça: {selectedSubRace ? selectedSubRace.nome : "Sem Sub-Raça"}
       </Text>
+      <Text style={styles.info}>Características da Classe: {selectedClass.traits} </Text>
     </View>
   );
 }

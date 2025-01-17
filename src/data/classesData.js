@@ -4,7 +4,7 @@ export const classes = [
       nome: "Guerreiro",
       image: require("../assets/images/classImages/guerreiro.jpg"),
       descricao: "Um mestre das armas, especialista em combate corpo a corpo.",
-      habilidades: ["Ataque Poderoso", "Defesa"],
+      traits: [`Ataque Poderoso, Defesa`],
       
     },
     {
@@ -12,7 +12,7 @@ export const classes = [
       nome: "Mago",
       image: require("../assets/images/classImages/mago.jpg"),
       descricao: "Um mestre das artes arcanas, capaz de conjurar feitiços poderosos.",
-      habilidades: ["Bola de Fogo", "Teleporte"],
+      traits: ["Bola de Fogo", "Teleporte"],
       
     },
   ];
