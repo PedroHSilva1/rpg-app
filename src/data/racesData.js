@@ -2,7 +2,7 @@ export const races = [
     {
       id: 1,
       nome: "Humano",
-      image: require("../assets/Images/racesImages/humano.jpg"),
+      image: require("../assets/images/racesImages/humano.jpg"),
       descricao: `  Nos confins da maioria dos mundos, os humanos são a mais jovem das raças comuns, chegando mais tarde no cenário mundial e com uma vida curta, se comparados aos anões, elfos e dragões.
 
   Talvez seja por causa de suas vidas mais curtas que eles se esforcem para alcançar o máximo que podem nos anos que têm.
@@ -16,7 +16,7 @@ export const races = [
     {
       id: 2,
       nome: "Elfo",
-      image: require("../assets/Images/racesImages/elfo.jpg"),
+      image: require("../assets/images/racesImages/elfo.jpg"),
       descricao: `  Elfos são um povo mágico de graça sobrenatural, vivendo no mundo sem pertencer inteiramente à ele. 
       
   Eles vivem em lugares de beleza etérea, no meio de antigas florestas ou em torres prateadas brilhando com luz feérica, onde uma música suave ecoa através do ar e fragrâncias suaves flutuam na brisa.
@@ -52,7 +52,7 @@ Normalmente eles possuem olhos muito pálidos (tão pálidos que são confundido
     {
       id: 3,
       nome: "Anão",
-      image: require("../assets/Images/racesImages/anao.jpg"),
+      image: require("../assets/images/racesImages/anao.jpg"),
       descricao: `  Uma injustiça cometida contra um anão é uma ofensa para todo seu clã. 
       
   O que começa como uma busca por vingança de um único anão, pode se tornar a ambição de todo um clã. `,
@@ -78,7 +78,7 @@ Normalmente eles possuem olhos muito pálidos (tão pálidos que são confundido
     {
       id: 4,
       nome: "Halfling",
-      image: require("../assets/Images/racesImages/halfling.jpg"),
+      image: require("../assets/images/racesImages/halfling.jpg"),
       descricao: `  Os confortos de um lar são os objetivos da maioria dos halflings: um lugar para viver em paz e sossego, longe de monstros saqueadores e embates de exércitos, com um fogo aceso e uma refeição generosa, e também uma bebida fina e boa conversa.
 
   Embora alguns halflings vivam seus dias em remotas comunidades agrícolas, outros formam bandos nômades que viajam constantemente, atraídos pela estrada afora e o vasto horizonte para descobrir as maravilhas de novas terras e povos.
@@ -108,7 +108,7 @@ Normalmente eles possuem olhos muito pálidos (tão pálidos que são confundido
     {
       id: 5,
       nome: "Draconato",
-      image: require("../assets/Images/racesImages/draconato.jpg"),
+      image: require("../assets/images/racesImages/draconato.jpg"),
       descricao: `  Descendentes de dragões, como seus nomes demonstram, os draconatos andam orgulhosamente pelo mundo que os saúda com um temor incompreensível.
 
   Moldados por deuses dracônicos ou pelos próprios dragões, draconatos originalmente nasceram de ovos de dragão como uma raça única, combinando os melhores atributos de dragões e humanos.
@@ -120,7 +120,7 @@ Normalmente eles possuem olhos muito pálidos (tão pálidos que são confundido
     {
       id: 6,
       nome: "Gnomo",
-      image: require("../assets/Images/racesImages/gnomo.jpg"),
+      image: require("../assets/images/racesImages/gnomo.jpg"),
       descricao: `  Um zumbido constante de atividades permeia a vizinhança onde os gnomos formam suas comunidades privadas.
 
   Barulhos estrondosos pontuam o zumbido: um tilintar de engrenagens moendo aqui, uma pequena explosão ali, um grito de surpresa ou comemoração e, principalmente, muitas gargalhadas.
@@ -153,7 +153,7 @@ Gnomos da floresta são raros e reservados. Eles vivem em comunidades escondidas
     {
       id: 7,
       nome: "Meio-Elfo",
-      image: require("../assets/Images/racesImages/meioelfo.jpg"),
+      image: require("../assets/images/racesImages/meioelfo.jpg"),
       descricao: `  Vagando entre dois mundos mas, na verdade, não pertencendo a nenhum dos dois, meio-elfos combinam o que alguns dizem ser as melhores qualidades dos seus parentes elfos e humanos: a curiosidade, inventividade e ambição humanas temperadas pelos sensos refinados, amor a natureza e gostos artísticos dos elfos.
 
   Alguns meio-elfos vivem entre os humanos, separados por suas diferenças emocionais e físicas, vendo seus amigos e amores envelhecer enquanto o tempo malmente os toca.
@@ -167,7 +167,7 @@ Gnomos da floresta são raros e reservados. Eles vivem em comunidades escondidas
     {
       id: 8,
       nome: "Meio-Orc",
-      image: require("../assets/Images/racesImages/meioorc.jpg"),
+      image: require("../assets/images/racesImages/meioorc.jpg"),
       descricao: `  Quer estejam unidos sob a liderança de um poderoso bruxo ou estejam lutando por um impasse após anos de conflito, tribos orcs e humanas as vezes formam alianças, unindo forças em uma vasta horda para o pavor das terras civilizadas próximas.
 
   Quando essas alianças são seladas através do casamento, os meio-orcs nascem.
@@ -183,7 +183,7 @@ Gnomos da floresta são raros e reservados. Eles vivem em comunidades escondidas
     {
       id: 9,
       nome: "Tiefling",
-      image: require("../assets/Images/racesImages/tiefling.jpg"),
+      image: require("../assets/images/racesImages/tiefling.jpg"),
       descricao: `  Ser recebido com olhares e cochichos, sofrer violência e insultos nas ruas, ver a desconfiança e medo em cada olhar: esse é o fardo do tiefling.
 
   E para completar tudo, os tieflings sabem que isso é graças ao pacto feito gerações atrás que infundiu a essência de Asmodeus – senhor supremo dos Nove Infernos – em sua linhagem.

@@ -9,7 +9,9 @@ export default function CharacterSheetScreen({ route }) {
       <Text style={styles.title}>Ficha do Personagem</Text>
       <Text style={styles.info}>Classe: {selectedClass.name}</Text>
       <Text style={styles.info}>Raça: {selectedRace.nome}</Text>
-      <Text style={styles.info}>Sub-Raça: {selectedSubRace.nome}</Text>
+      <Text style={styles.info}>
+        Sub-Raça: {selectedSubRace ? selectedSubRace.nome : "Sem Sub-Raça"}
+      </Text>
     </View>
   );
 }
