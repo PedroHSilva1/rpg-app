@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model attributes {
+  id     Int      @id @default(autoincrement())
+  name   String   @db.VarChar(15)
+  value  Int
+  skills skills[]
+}
+
+model classes {
+  id          Int    @id @default(autoincrement())
+  name        String @db.VarChar(20)
+  description String @db.Text
+  traits      String @db.Text
+}
+
+model creatures {
+  id          Int    @id @default(autoincrement())
+  name        String @db.VarChar(40)
+  type        String @db.VarChar(6)
+  locate      String @db.VarChar(50)
+  description String @db.Text
+  image       Int
+}
+
+model races {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(10)
+  description  String         @db.Text
+  races_traits races_traits[]
+  subrace      subrace[]
+}
+
+model races_traits {
+  id          Int    @id @default(autoincrement())
+  race_id     Int
+  name        String @db.VarChar(30)
+  description String @db.Text
+  races       races  @relation(fields: [race_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "races_traits_ibfk_1")
+
+  @@index([race_id], map: "races_traits_ibfk_1")
+}
+
+model skills {
+  id           Int        @id @default(autoincrement())
+  attribute_id Int
+  name         String     @db.VarChar(20)
+  attributes   attributes @relation(fields: [attribute_id], references: [id], onUpdate: Restrict, map: "skills_ibfk_1")
+
+  @@index([attribute_id], map: "attribute_id")
+}
+
+model subrace {
+  id             Int              @id @default(autoincrement())
+  race_id        Int
+  name           String           @db.VarChar(35)
+  description    String           @db.Text
+  races          races            @relation(fields: [race_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "subrace_ibfk_1")
+  subrace_traits subrace_traits[]
+
+  @@index([race_id], map: "race_id")
+}
+
+model subrace_traits {
+  id          Int     @id @default(autoincrement())
+  subrace_id  Int
+  name        String  @db.VarChar(30)
+  description String  @db.Text
+  subrace     subrace @relation(fields: [subrace_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "subrace_traits_ibfk_1")
+
+  @@index([subrace_id], map: "subrace_traits_ibfk_1")
+}

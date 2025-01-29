@@ -4,19 +4,23 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, Text, TouchableOpacity } from "react-native";
+
+// Importação das telas
 import HomeScreen from "./src/screens/HomeScreen";
 import Highlight from "./src/screens/Highlight";
 import CreaturesScreen from "./src/screens/CreaturesScreen";
 import DeitiesScreen from "./src/screens/Deities";
-import ClassSelectionScreen from "./src/screens/ClassSelectionScreen";
 import RaceSelectionScreen from "./src/screens/RaceSelectionScreen";
+import ClassSelectionScreen from "./src/screens/ClassSelectionScreen";
+import AttributeSelectionScreen from "./src/screens/AttributeSelectionScreen";
+import SkillSelectionScreen from "./src/screens/SkillSelectionScreen";
 import CharacterSheetScreen from "./src/screens/CharacterSheetScreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-// Stack navigator for character creation flow
+// Stack navigator para o fluxo de criação de personagem
 function CharacterCreationStack() {
   return (
     <Stack.Navigator
@@ -24,14 +28,24 @@ function CharacterCreationStack() {
       screenOptions={{ headerShown: false, cardStyle: { backgroundColor: "#000" } }}
     >
       <Stack.Screen
+        name="RaceSelectionScreen"
+        component={RaceSelectionScreen}
+        options={{ title: "Selecione uma Raça" }}
+      />
+      <Stack.Screen
         name="ClassSelectionScreen"
         component={ClassSelectionScreen}
         options={{ title: "Selecione uma Classe" }}
       />
       <Stack.Screen
-        name="RaceSelectionScreen"
-        component={RaceSelectionScreen}
-        options={{ title: "Selecione uma Raça" }}
+        name="AttributeSelectionScreen"
+        component={AttributeSelectionScreen}
+        options={{ title: "Distribua Atributos" }}
+      />
+      <Stack.Screen
+        name="SkillSelectionScreen"
+        component={SkillSelectionScreen}
+        options={{ title: "Escolha Perícias" }}
       />
       <Stack.Screen
         name="CharacterSheetScreen"
@@ -42,7 +56,7 @@ function CharacterCreationStack() {
   );
 }
 
-// Drawer navigation for Wiki-related screens with dark theme
+// Drawer navigation para telas relacionadas à Wiki com tema escuro
 function WikiDrawer() {
   return (
     <Drawer.Navigator
@@ -79,7 +93,7 @@ function WikiDrawer() {
   );
 }
 
-// Custom tab bar to make buttons smaller and more compact
+// Barra de navegação personalizada para os botões do rodapé
 function CustomTabBar({ state, descriptors, navigation }) {
   return (
     <View style={{ flexDirection: "row", height: 50, backgroundColor: "#333", borderTopWidth: 1, borderTopColor: "#222" }}>
@@ -115,7 +129,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
   );
 }
 
-// Main Tab Navigation for switching between Wiki and Character Creation
+// Navegação principal com tabs para Wiki e Criação de Personagem
 export default function App() {
   return (
     <NavigationContainer>

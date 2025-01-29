@@ -1,23 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
+import axios from "axios";
 import Card from "../components/Card";
-import { races } from "../data/racesData";
 
 export default function RaceSelectionScreen({ route, navigation }) {
+  const [races, setRaces] = useState([]);
+  const [subRaces, setSubRaces] = useState([]);
   const [selectedRace, setSelectedRace] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const selectedClass = route.params.selectedClass;
 
-  const filteredRaces = selectedRace
-    ? races.filter((race) => race.subRaceOf === selectedRace.id)
-    : races.filter((race) => !race.subRaceOf);
+  useEffect(() => {
+    // Buscar raças ao carregar o componente
+    const fetchRaces = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/api/races");
+        setRaces(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar raças:", error);
+      }
+    };
+    fetchRaces();
+  }, []);
 
-  const handleRaceSelection = (race) => {
-    const hasSubRaces = races.some((r) => r.subRaceOf === race.id);
-    if (hasSubRaces) {
+  const handleRaceSelection = async (race) => {
+    try {
       setSelectedRace(race);
-    } else {
-      handleLoadingAndNavigation(race, null);
+
+      // Buscar sub-raças da raça selecionada
+      const response = await axios.get(`http://localhost:3001/api/subraces/${race.id}`);
+      setSubRaces(response.data);
+
+      // Se não houver sub-raças, navegue direto
+      if (response.data.length === 0) {
+        handleLoadingAndNavigation(race, null);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar sub-raças:", error);
     }
   };
 
@@ -26,23 +44,21 @@ export default function RaceSelectionScreen({ route, navigation }) {
   };
 
   const handleLoadingAndNavigation = (race, subRace) => {
-    setIsLoading(true); // Ativa o carregamento
+    setIsLoading(true);
     setTimeout(() => {
-      // Após 3 segundos, redireciona para a ficha do personagem
       setIsLoading(false);
       navigation.navigate("CharacterSheetScreen", {
-        selectedClass,
         selectedRace: race,
         selectedSubRace: subRace,
       });
-    }, 3000);
+    }, 1000);
   };
 
   if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#bb86fc" />
-        <Text style={styles.loadingText}>Criando a Ficha do Personagem...</Text>
+        <Text style={styles.loadingText}>Carregando...</Text>
       </View>
     );
   }
@@ -50,17 +66,17 @@ export default function RaceSelectionScreen({ route, navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>
-        {selectedRace ? `Selecione uma Sub-Raça para ${selectedRace.nome}` : "Selecione uma Raça"}
+        {selectedRace ? `Selecione uma Sub-Raça para ${selectedRace.name}` : "Selecione uma Raça"}
       </Text>
 
-      {filteredRaces.map((item) => (
+      {(selectedRace ? subRaces : races).map((item) => (
         <TouchableOpacity
           key={item.id}
           onPress={() =>
             selectedRace ? handleSubRaceSelection(item) : handleRaceSelection(item)
           }
         >
-          <Card title={item.nome} description={item.descricao} image={item.image}/>
+          <Card title={item.name} description={item.description} />
         </TouchableOpacity>
       ))}
 
