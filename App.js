@@ -15,6 +15,7 @@ import ClassSelectionScreen from "./src/screens/ClassSelectionScreen";
 import AttributeSelectionScreen from "./src/screens/AttributeSelectionScreen";
 import SkillSelectionScreen from "./src/screens/SkillSelectionScreen";
 import CharacterSheetScreen from "./src/screens/CharacterSheetScreen";
+import SubRaceSelectionScreen from "./src/screens/SubRaceSelectionScreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,17 +27,26 @@ function CharacterCreationStack() {
     <Stack.Navigator
       initialRouteName="ClassSelectionScreen"
       screenOptions={{ headerShown: false, cardStyle: { backgroundColor: "#000" } }}
-    >
-      <Stack.Screen
-        name="RaceSelectionScreen"
-        component={RaceSelectionScreen}
-        options={{ title: "Selecione uma Raça" }}
-      />
+    > 
       <Stack.Screen
         name="ClassSelectionScreen"
         component={ClassSelectionScreen}
         options={{ title: "Selecione uma Classe" }}
       />
+
+      <Stack.Screen
+        name="RaceSelectionScreen"
+        component={RaceSelectionScreen}
+        options={{ title: "Selecione uma Raça" }}
+      />
+
+
+      <Stack.Screen
+        name="SubRaceSelectionScreen"
+        component={SubRaceSelectionScreen}
+        options={{ title: "Selecione uma Sub-Raça" }}
+      />
+      
       <Stack.Screen
         name="AttributeSelectionScreen"
         component={AttributeSelectionScreen}

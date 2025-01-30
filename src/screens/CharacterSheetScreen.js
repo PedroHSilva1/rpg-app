@@ -1,8 +1,26 @@
-import React, { useState } from "react";
-import { View, Text, Button, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 
 export default function CharacterSheetScreen() {
   const [activeTab, setActiveTab] = useState("status");
+  const [skills, setSkills] = useState([]); // Estado para armazenar as skills
+
+  useEffect(() => {
+    // Buscar as skills apenas quando a aba "Perícias" for selecionada
+    if (activeTab === "skills") {
+      fetchSkills();
+    }
+  }, [activeTab]); // Esse efeito roda toda vez que a aba mudar
+
+  const fetchSkills = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/skill"); // Ajuste o IP se estiver no celular físico
+      const data = await response.json();
+      setSkills(data);
+    } catch (error) {
+      console.error("Erro ao buscar skills:", error);
+    }
+  };
 
   const renderContent = () => {
     switch (activeTab) {
@@ -19,9 +37,15 @@ export default function CharacterSheetScreen() {
         return (
           <View>
             <Text style={styles.sectionTitle}>Perícias</Text>
-            <Text style={styles.text}>Acrobacia: +4</Text>
-            <Text style={styles.text}>Arcanismo: +2</Text>
-            <Text style={styles.text}>Furtividade: +5</Text>
+            {skills.length > 0 ? (
+              skills.map((skill) => (
+                <Text key={skill.id} style={styles.text}>
+                  {skill.name}: +{skill.bonus}
+                </Text>
+              ))
+            ) : (
+              <Text style={styles.text}>Nenhuma perícia encontrada.</Text>
+            )}
           </View>
         );
       case "features":

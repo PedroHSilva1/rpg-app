@@ -1,124 +1,59 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
-import axios from "axios";
-import Card from "../components/Card";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import Card from "../components/Card"; // Certifique-se que o Card está correto
 
-export default function RaceSelectionScreen({ route, navigation }) {
+const RaceSelectionScreen = () => {
   const [races, setRaces] = useState([]);
-  const [subRaces, setSubRaces] = useState([]);
-  const [selectedRace, setSelectedRace] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
-    // Buscar raças ao carregar o componente
     const fetchRaces = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/races");
-        setRaces(response.data);
+        const response = await fetch("http://localhost:3001/races");
+        const data = await response.json();
+        setRaces(data);
       } catch (error) {
         console.error("Erro ao buscar raças:", error);
       }
     };
+
     fetchRaces();
   }, []);
 
   const handleRaceSelection = async (race) => {
     try {
-      setSelectedRace(race);
-
-      // Buscar sub-raças da raça selecionada
-      const response = await axios.get(`http://localhost:3001/api/subraces/${race.id}`);
-      setSubRaces(response.data);
-
-      // Se não houver sub-raças, navegue direto
-      if (response.data.length === 0) {
-        handleLoadingAndNavigation(race, null);
+      // Fazemos uma requisição para verificar se há sub-raças
+      const response = await fetch(`http://localhost:3001/subraces/race/${race.id}`);
+      const data = await response.json();
+  
+      if (data.length > 0) {
+        // Se houver sub-raças, navegamos para a tela de sub-raças
+        navigation.navigate("SubRaceSelectionScreen", { raceId: race.id, raceName: race.name });
+      } else {
+        // Se não houver sub-raças, vá direto para a próxima tela desejada
+        navigation.navigate("CharacterSheetScreen", { raceId: race.id, raceName: race.name });
       }
     } catch (error) {
-      console.error("Erro ao buscar sub-raças:", error);
+      console.error("Erro ao verificar sub-raças:", error);
     }
   };
 
-  const handleSubRaceSelection = (subRace) => {
-    handleLoadingAndNavigation(selectedRace, subRace);
-  };
-
-  const handleLoadingAndNavigation = (race, subRace) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      navigation.navigate("CharacterSheetScreen", {
-        selectedRace: race,
-        selectedSubRace: subRace,
-      });
-    }, 1000);
-  };
-
-  if (isLoading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#bb86fc" />
-        <Text style={styles.loadingText}>Carregando...</Text>
-      </View>
-    );
-  }
-
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>
-        {selectedRace ? `Selecione uma Sub-Raça para ${selectedRace.name}` : "Selecione uma Raça"}
-      </Text>
-
-      {(selectedRace ? subRaces : races).map((item) => (
-        <TouchableOpacity
-          key={item.id}
-          onPress={() =>
-            selectedRace ? handleSubRaceSelection(item) : handleRaceSelection(item)
-          }
-        >
-          <Card title={item.name} description={item.description} />
-        </TouchableOpacity>
-      ))}
-
-      {selectedRace && (
-        <TouchableOpacity style={styles.backButton} onPress={() => setSelectedRace(null)}>
-          <Text style={styles.backButtonText}>Voltar</Text>
-        </TouchableOpacity>
+    <ScrollView contentContainerStyle={{ padding: 20 }}>
+      <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 10 }}>Selecione uma Raça</Text>
+      
+      {races.length > 0 ? (
+        races.map((race) => (
+          <TouchableOpacity key={race.id} onPress={() => handleRaceSelection(race)}>
+            <Card title={race.name} description={race.description} />
+          </TouchableOpacity>
+        ))
+      ) : (
+        <Text>Nenhuma raça encontrada</Text>
       )}
     </ScrollView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "#fff",
-  },
-  backButton: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: "#bb86fc",
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  backButtonText: {
-    color: "#fff",
-    fontSize: 16,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#121212",
-  },
-  loadingText: {
-    color: "#fff",
-    marginTop: 10,
-    fontSize: 16,
-  },
-});
+export default RaceSelectionScreen;
