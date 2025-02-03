@@ -16,6 +16,7 @@ import AttributeSelectionScreen from "./src/screens/AttributeSelectionScreen";
 import SkillSelectionScreen from "./src/screens/SkillSelectionScreen";
 import CharacterSheetScreen from "./src/screens/CharacterSheetScreen";
 import SubRaceSelectionScreen from "./src/screens/SubRaceSelectionScreen";
+import LocateScreen from "./src/screens/LocateScreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -98,6 +99,11 @@ function WikiDrawer() {
         name="DeitiesScreen"
         component={DeitiesScreen}
         options={{ title: "Deuses" }}
+      />
+      <Drawer.Screen
+        name="LocateScreen.js"
+        component={LocateScreen}
+        options={{ title: "Mundo"}}
       />
     </Drawer.Navigator>
   );

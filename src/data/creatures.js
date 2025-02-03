@@ -22,6 +22,7 @@ export const creatures = [
         nome: "Carniçal da Madeira",
         tipo: "Hostil",
         localidade: "Floresta Amaldiçoada",
+        image: require("../assets/images/CM.png"),
         descricao: "Uma criatura parasita. Reside nas cascas de árvores, sugando sua energia como alimento.",
       },
   ];

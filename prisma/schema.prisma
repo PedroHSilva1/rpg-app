@@ -21,6 +21,14 @@ model classes {
   traits      String @db.Text
 }
 
+model locates {
+  id          Int    @id @default(autoincrement())
+  location    String @db.VarChar(20)
+  name        String @db.VarChar(30)
+  subtitle    String @db.VarChar(30)
+  description String @db.Text
+}
+
 model creatures {
   id          Int    @id @default(autoincrement())
   name        String @db.VarChar(40)

@@ -1,24 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import Card from "../components/Card";
+import { icons } from "../assets/images/images.js"; // Importa os ícones do arquivo externo
 
 export default function CharacterSheetScreen() {
+  const route = useRoute();
+  const { raceId, raceName, subRaceId, subRaceName } = route.params;
   const [activeTab, setActiveTab] = useState("status");
-  const [skills, setSkills] = useState([]); // Estado para armazenar as skills
+  const [skills, setSkills] = useState([]);
+  const [features, setFeatures] = useState([]);
 
   useEffect(() => {
-    // Buscar as skills apenas quando a aba "Perícias" for selecionada
     if (activeTab === "skills") {
       fetchSkills();
+    } else if (activeTab === "features") {
+      fetchFeatures();
     }
-  }, [activeTab]); // Esse efeito roda toda vez que a aba mudar
+  }, [activeTab]);
 
   const fetchSkills = async () => {
     try {
-      const response = await fetch("http://localhost:3001/skill"); // Ajuste o IP se estiver no celular físico
+      const response = await fetch("http://localhost:3001/skill");
       const data = await response.json();
       setSkills(data);
     } catch (error) {
       console.error("Erro ao buscar skills:", error);
+    }
+  };
+
+  const fetchFeatures = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/race_trait/race/${raceId}`);
+      const data = await response.json();
+      setFeatures(data);
+    } catch (error) {
+      console.error("Erro ao buscar features:", error);
     }
   };
 
@@ -40,7 +57,7 @@ export default function CharacterSheetScreen() {
             {skills.length > 0 ? (
               skills.map((skill) => (
                 <Text key={skill.id} style={styles.text}>
-                  {skill.name}: +{skill.bonus}
+                  {skill.name}: 0
                 </Text>
               ))
             ) : (
@@ -50,11 +67,16 @@ export default function CharacterSheetScreen() {
         );
       case "features":
         return (
-          <View>
+          <ScrollView>
             <Text style={styles.sectionTitle}>Características</Text>
-            <Text style={styles.text}>Força Extraordinária</Text>
-            <Text style={styles.text}>Resistência Física</Text>
-          </View>
+            {features.length > 0 ? (
+              features.map((feature) => (
+                <Card key={feature.id} title={feature.name} subtitle={raceName} description={feature.description} />
+              ))
+            ) : (
+              <Text style={styles.text}></Text>
+            )}
+          </ScrollView>
         );
       case "items":
         return (
@@ -69,7 +91,6 @@ export default function CharacterSheetScreen() {
         return (
           <View>
             <Text style={styles.sectionTitle}>Magias</Text>
-            <Text style={styles.text}>Bola de Fogo</Text>
             <Text style={styles.text}>Mísseis Mágicos</Text>
           </View>
         );
@@ -78,28 +99,23 @@ export default function CharacterSheetScreen() {
     }
   };
 
-  return (
+   return (
     <View style={styles.container}>
       {/* Botões na parte superior */}
       <View style={styles.tabContainer}>
-        <TouchableOpacity style={styles.tabButton} onPress={() => setActiveTab("status")}>
-          <Text style={styles.tabText}>Status</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tabButton} onPress={() => setActiveTab("skills")}>
-          <Text style={styles.tabText}>Perícias</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tabButton} onPress={() => setActiveTab("features")}>
-          <Text style={styles.tabText}>Características</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tabButton} onPress={() => setActiveTab("items")}>
-          <Text style={styles.tabText}>Itens</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tabButton} onPress={() => setActiveTab("spells")}>
-          <Text style={styles.tabText}>Magias</Text>
-        </TouchableOpacity>
+        {Object.keys(icons).map((tab) => (
+          <TouchableOpacity key={tab} onPress={() => setActiveTab(tab)}>
+            <View style={[styles.iconWrapper, activeTab === tab && styles.activeIconWrapper]}>
+              <Image
+                source={activeTab === tab ? icons[tab].active : icons[tab].inactive}
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
+        ))}
       </View>
 
-      {/* Conteúdo dinâmico */}
+      
       <ScrollView style={styles.contentContainer}>{renderContent()}</ScrollView>
     </View>
   );
@@ -116,18 +132,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10,
   },
-  tabButton: {
-    flex: 1,
-    alignItems: "center",
+  iconWrapper: {
+    backgroundColor: "#FFFFFF", 
     padding: 10,
-    backgroundColor: "#333",
-    marginHorizontal: 2,
-    borderRadius: 5,
+    borderRadius: 50, // Deixa o fundo arredondado
   },
-  tabText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "bold",
+  activeIconWrapper: {
+    backgroundColor: "transparent",
+  },
+  icon: {
+    width: 50 ,
+    height: 50,
   },
   contentContainer: {
     backgroundColor: "#1c1c1c",

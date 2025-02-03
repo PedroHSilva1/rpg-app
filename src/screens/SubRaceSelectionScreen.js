@@ -32,8 +32,10 @@ const SubRaceSelectionScreen = () => {
 
       // Navegar para a tela de ficha do personagem com os dados da raça e da sub-raça
       navigation.navigate("CharacterSheetScreen", {
-        race: raceData,   // Enviamos todas as informações da raça
-        subRace: subRace, // Enviamos todas as informações da sub-raça
+        raceId: raceId,
+        raceName: raceName,
+        subRaceId: subRace.id,   
+        subRaceName: subRace.name, // Enviamos todas as informações da sub-raça
       });
     } catch (error) {
       console.error("Erro ao buscar dados da raça:", error);

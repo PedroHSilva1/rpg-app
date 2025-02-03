@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Card from "../components/Card"; // Certifique-se que o Card está correto
+import Card from "../components/Card";
+import { raceImages } from "../assets/images/images";
 
 const RaceSelectionScreen = () => {
   const [races, setRaces] = useState([]);
@@ -46,7 +47,7 @@ const RaceSelectionScreen = () => {
       {races.length > 0 ? (
         races.map((race) => (
           <TouchableOpacity key={race.id} onPress={() => handleRaceSelection(race)}>
-            <Card title={race.name} description={race.description} />
+            <Card title={race.name} description={race.description} image={raceImages[race.id]} />
           </TouchableOpacity>
         ))
       ) : (
