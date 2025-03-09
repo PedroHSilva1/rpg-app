@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "rea
 import { useRoute } from "@react-navigation/native";
 import Card from "../components/Card";
 import { icons } from "../assets/images/images.js"; // Importa os ícones do arquivo externo
+import { globalStyles } from "../styles/globalStyles.js";
 
 export default function CharacterSheetScreen() {
   const route = useRoute();
@@ -44,71 +45,71 @@ export default function CharacterSheetScreen() {
       case "status":
         return (
           <View>
-            <Text style={styles.sectionTitle}>Status</Text>
-            <Text style={styles.text}>Vida: 30</Text>
-            <Text style={styles.text}>CA: 15</Text>
-            <Text style={styles.text}>Iniciativa: +2</Text>
+            <Text style={globalStyles.sectionTitle}>Status</Text>
+            <Text style={globalStyles.text}>Vida: 30</Text>
+            <Text style={globalStyles.text}>CA: 15</Text>
+            <Text style={globalStyles.text}>Iniciativa: +2</Text>
           </View>
         );
       case "skills":
         return (
           <View>
-            <Text style={styles.sectionTitle}>Perícias</Text>
+            <Text style={globalStyles.sectionTitle}>Perícias</Text>
             {skills.length > 0 ? (
               skills.map((skill) => (
-                <Text key={skill.id} style={styles.text}>
+                <Text key={skill.id} style={globalStyles.text}>
                   {skill.name}: 0
                 </Text>
               ))
             ) : (
-              <Text style={styles.text}>Nenhuma perícia encontrada.</Text>
+              <Text style={globalStyles.text}>Nenhuma perícia encontrada.</Text>
             )}
           </View>
         );
       case "features":
         return (
           <ScrollView>
-            <Text style={styles.sectionTitle}>Características</Text>
+            <Text style={globalStyles.sectionTitle}>Características</Text>
             {features.length > 0 ? (
               features.map((feature) => (
                 <Card key={feature.id} title={feature.name} subtitle={raceName} description={feature.description} />
               ))
             ) : (
-              <Text style={styles.text}></Text>
+              <Text style={globalStyles.text}></Text>
             )}
           </ScrollView>
         );
       case "items":
         return (
           <View>
-            <Text style={styles.sectionTitle}>Itens</Text>
-            <Text style={styles.text}>Espada Longa</Text>
-            <Text style={styles.text}>Poção de Cura</Text>
-            <Text style={styles.text}>Escudo</Text>
+            <Text style={globalStyles.sectionTitle}>Itens</Text>
+            <Text style={globalStyles.text}>Espada Longa</Text>
+            <Text style={globalStyles.text}>Poção de Cura</Text>
+            <Text style={globalStyles.text}>Escudo</Text>
           </View>
         );
       case "spells":
         return (
           <View>
-            <Text style={styles.sectionTitle}>Magias</Text>
-            <Text style={styles.text}>Mísseis Mágicos</Text>
+            <Text style={globalStyles.sectionTitle}>Magias</Text>
+            <Text style={globalStyles.text}>Mísseis Mágicos</Text>
           </View>
         );
       default:
-        return <Text style={styles.text}>Selecione uma aba.</Text>;
+        return <Text style={globalStyles.text}>Selecione uma aba.</Text>;
     }
   };
 
    return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       {/* Botões na parte superior */}
-      <View style={styles.tabContainer}>
+      <View style={globalStyles.tabContainer}>
         {Object.keys(icons).map((tab) => (
           <TouchableOpacity key={tab} onPress={() => setActiveTab(tab)}>
-            <View style={[styles.iconWrapper, activeTab === tab && styles.activeIconWrapper]}>
+            <View style={[globalStyles.iconWrapper, activeTab === tab && globalStyles.activeIconWrapper]}>
               <Image
                 source={activeTab === tab ? icons[tab].active : icons[tab].inactive}
-                style={styles.icon}
+                style={globalStyles.icon}
               />
             </View>
           </TouchableOpacity>
@@ -116,48 +117,8 @@ export default function CharacterSheetScreen() {
       </View>
 
       
-      <ScrollView style={styles.contentContainer}>{renderContent()}</ScrollView>
+      <ScrollView style={globalStyles.contentContainer}>{renderContent()}</ScrollView>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-    padding: 10,
-  },
-  tabContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 10,
-  },
-  iconWrapper: {
-    backgroundColor: "#FFFFFF", 
-    padding: 10,
-    borderRadius: 50, // Deixa o fundo arredondado
-  },
-  activeIconWrapper: {
-    backgroundColor: "transparent",
-  },
-  icon: {
-    width: 50 ,
-    height: 50,
-  },
-  contentContainer: {
-    backgroundColor: "#1c1c1c",
-    padding: 10,
-    borderRadius: 5,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#bb86fc",
-    marginBottom: 10,
-  },
-  text: {
-    fontSize: 16,
-    color: "#fff",
-    marginBottom: 5,
-  },
-});

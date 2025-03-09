@@ -2,11 +2,13 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import Card from '../components/Card';
 import { classes } from '../data/classesData'; 
+import { globalStyles } from '../styles/globalStyles.js';
 
 export default function ClassSelectionScreen({ navigation }) {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Selecione uma Classe</Text>
+    <ScrollView contentContainerStyle={globalStyles.container}
+    style={globalStyles.scrollContent}>
+      <Text style={globalStyles.title}>Selecione uma Classe</Text>
       {classes.map((item, index) => (
         <TouchableOpacity
           key={index}
@@ -18,15 +20,3 @@ export default function ClassSelectionScreen({ navigation }) {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#fff',
-  },
-});

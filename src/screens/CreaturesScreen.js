@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, View, Text, StyleSheet, Picker } from "react-native";
 import Card from "../components/Card";
 import { creatures } from "../data/creatures";
+import { globalStyles } from "../styles/globalStyles.js";
 
 export default function CreaturesScreen() {
   const [filter, setFilter] = useState("Todas");
@@ -11,15 +12,15 @@ export default function CreaturesScreen() {
     : creatures.filter((creature) => creature.localidade === filter);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-     
+    <ScrollView style={globalStyles.container}
+    contentContainerStyle={globalStyles.scrollContent}>
 
-      <View style={styles.pickerContainer}>
-        <Text style={styles.label}>Filtrar por Localidade:</Text>
+      <View style={globalStyles.pickerContainer}>
+        <Text style={globalStyles.label}>Filtrar por Localidade:</Text>
         <Picker
           selectedValue={filter}
           onValueChange={(itemValue) => setFilter(itemValue)}
-          style={styles.picker}
+          style={globalStyles.picker}
         >
           <Picker.Item label="Todas" value="Todas" />
           <Picker.Item label="Reino de Amélia" value="Reino de Amélia" />

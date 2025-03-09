@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import skillsData from "../data/skillData";
+import { globalStyles } from "../styles/globalStyles.js";
 
 export default function SkillSelectionScreen({ route, navigation }) {
   const { attributes } = route.params;
@@ -15,8 +16,8 @@ export default function SkillSelectionScreen({ route, navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Selecione suas Perícias</Text>
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.title}>Selecione suas Perícias</Text>
       <FlatList
         data={skillsData}
         keyExtractor={(item) => item.id.toString()}
@@ -28,20 +29,20 @@ export default function SkillSelectionScreen({ route, navigation }) {
             ]}
             onPress={() => handleSelect(item)}
           >
-            <Text style={styles.cardTitle}>{item.name}</Text>
-            <Text style={styles.cardDescription}>
+            <Text style={globalStyles.cardTitle}>{item.name}</Text>
+            <Text style={globalStyles.cardDescription}>
               Atributo: {item.relatedAttribute}
             </Text>
           </TouchableOpacity>
         )}
       />
       <TouchableOpacity
-        style={styles.button}
+        style={globalStyles.button}
         onPress={() =>
           navigation.navigate("SpellSelectionScreen", { attributes, selectedSkills })
         }
       >
-        <Text style={styles.buttonText}>Continuar</Text>
+        <Text style={globalStyles.buttonText}>Continuar</Text>
       </TouchableOpacity>
     </View>
   );
