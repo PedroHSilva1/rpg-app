@@ -3,9 +3,10 @@ import { ScrollView, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Card from "../components/Card";
 import { raceImages } from "../assets/images/images";
-import { globalStyles } from "../styles/globalStyles";
+import {useTheme} from "../styles/themeContext";
 
 export default function RaceSelectionScreen() {
+  const { styles } = useTheme();
   const [races, setRaces] = useState([]);
   const navigation = useNavigation();
 
@@ -48,10 +49,10 @@ export default function RaceSelectionScreen() {
 
   return (
     <ScrollView
-      style={globalStyles.container}
+      style={styles.container}
       contentContainerStyle={{ flexGrow: 1 }}
     >
-      <Text style={globalStyles.title}>Selecione uma Raça</Text>
+      <Text style={styles.title}>Selecione uma Raça</Text>
 
       {races.length > 0 ? (
         races.map((race) => (
@@ -64,7 +65,7 @@ export default function RaceSelectionScreen() {
           </TouchableOpacity>
         ))
       ) : (
-        <Text style={globalStyles.noDataText}>Nenhuma raça encontrada</Text>
+        <Text style={styles.noDataText}>Nenhuma raça encontrada</Text>
       )}
     </ScrollView>
   );

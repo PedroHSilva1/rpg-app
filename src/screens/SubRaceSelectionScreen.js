@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import Card from "../components/Card";
-import { globalStyles } from "../styles/globalStyles";
+import {useTheme} from "../styles/themeContext";
 
 export default function SubRaceSelectionScreen() {
+  const { styles } = useTheme();
   const [subRaces, setSubRaces] = useState([]);
   const route = useRoute();
   const navigation = useNavigation();
@@ -44,8 +45,8 @@ export default function SubRaceSelectionScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={globalStyles.container}>
-      <Text style={globalStyles.title}>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>
         Selecione uma Sub-Raça para {raceName}
       </Text>
 
@@ -62,16 +63,16 @@ export default function SubRaceSelectionScreen() {
           </TouchableOpacity>
         ))
       ) : (
-        <Text style={globalStyles.noDataText}>
+        <Text style={styles.noDataText}>
           Essa raça não possui sub-raças.
         </Text>
       )}
 
       <TouchableOpacity
-        style={[globalStyles.button, { marginTop: 20 }]}
+        style={[styles.button, { marginTop: 20 }]}
         onPress={() => navigation.goBack()}
       >
-        <Text style={globalStyles.buttonText}>Voltar</Text>
+        <Text style={styles.buttonText}>Voltar</Text>
       </TouchableOpacity>
     </ScrollView>
   );

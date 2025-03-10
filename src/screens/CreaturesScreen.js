@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { ScrollView, View, Text, StyleSheet, Picker } from "react-native";
 import Card from "../components/Card";
 import { creatures } from "../data/creatures";
-import { globalStyles } from "../styles/globalStyles.js";
+import {useTheme} from "../styles/themeContext";
 
 export default function CreaturesScreen() {
+  const { styles } = useTheme();
   const [filter, setFilter] = useState("Todas");
 
   const filteredCreatures = filter === "Todas"
@@ -12,15 +13,15 @@ export default function CreaturesScreen() {
     : creatures.filter((creature) => creature.localidade === filter);
 
   return (
-    <ScrollView style={globalStyles.container}
-    contentContainerStyle={globalStyles.scrollContent}>
+    <ScrollView style={styles.container}
+    contentContainerStyle={styles.scrollContent}>
 
-      <View style={globalStyles.pickerContainer}>
-        <Text style={globalStyles.label}>Filtrar por Localidade:</Text>
+      <View style={styles.pickerContainer}>
+        <Text style={styles.label}>Filtrar por Localidade:</Text>
         <Picker
           selectedValue={filter}
           onValueChange={(itemValue) => setFilter(itemValue)}
-          style={globalStyles.picker}
+          style={styles.picker}
         >
           <Picker.Item label="Todas" value="Todas" />
           <Picker.Item label="Reino de Amélia" value="Reino de Amélia" />
@@ -41,31 +42,4 @@ export default function CreaturesScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    padding: 16,
-    backgroundColor: "#121212",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 16,
-    color: "#ffffff",
-  },
-  pickerContainer: {
-    marginBottom: 16,
-    backgroundColor: "#1e1e1e",
-    borderRadius: 8,
-    padding: 8,
-  },
-  label: {
-    color: "#ffffff",
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  picker: {
-    color: "black",
-  },
-});
+

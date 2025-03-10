@@ -4,6 +4,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, Text, TouchableOpacity } from "react-native";
+import { ThemeProvider, useTheme } from "./src/styles/themeContext"; // Importação do ThemeProvider e useTheme
 
 // Importação das telas
 import HomeScreen from "./src/screens/HomeScreen";
@@ -17,6 +18,7 @@ import SkillSelectionScreen from "./src/screens/SkillSelectionScreen";
 import CharacterSheetScreen from "./src/screens/CharacterSheetScreen";
 import SubRaceSelectionScreen from "./src/screens/SubRaceSelectionScreen";
 import LocateScreen from "./src/screens/LocateScreen";
+import ThemeSelectionScreen from "./src/screens/ThemeSelectionScreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,20 +36,16 @@ function CharacterCreationStack() {
         component={ClassSelectionScreen}
         options={{ title: "Selecione uma Classe" }}
       />
-
       <Stack.Screen
         name="RaceSelectionScreen"
         component={RaceSelectionScreen}
         options={{ title: "Selecione uma Raça" }}
       />
-
-
       <Stack.Screen
         name="SubRaceSelectionScreen"
         component={SubRaceSelectionScreen}
         options={{ title: "Selecione uma Sub-Raça" }}
       />
-      
       <Stack.Screen
         name="AttributeSelectionScreen"
         component={AttributeSelectionScreen}
@@ -67,17 +65,19 @@ function CharacterCreationStack() {
   );
 }
 
-// Drawer navigation para telas relacionadas à Wiki com tema escuro
+// Drawer navigation para telas relacionadas à Wiki com tema dinâmico
 function WikiDrawer() {
+  const { styles } = useTheme();
+
   return (
     <Drawer.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{
-        headerStyle: { backgroundColor: "#121212" },
-        headerTintColor: "#ffffff",
-        drawerStyle: { backgroundColor: "#1c1c1c" },
-        drawerInactiveTintColor: "#ffffff",
-        drawerActiveTintColor: "#bb86fc",
+        headerStyle: { backgroundColor: styles.container.backgroundColor },
+        headerTintColor: styles.title.color,
+        drawerStyle: { backgroundColor: styles.container.backgroundColor },
+        drawerInactiveTintColor: styles.text.color,
+        drawerActiveTintColor: styles.button.backgroundColor,
       }}
     >
       <Drawer.Screen
@@ -101,9 +101,14 @@ function WikiDrawer() {
         options={{ title: "Deuses" }}
       />
       <Drawer.Screen
-        name="LocateScreen.js"
+        name="LocateScreen"
         component={LocateScreen}
         options={{ title: "Mundo"}}
+      />
+      <Drawer.Screen
+        name="ThemeSelectionScreen"
+        component={ThemeSelectionScreen}
+        options={{ title: "Cores" }}
       />
     </Drawer.Navigator>
   );
@@ -148,19 +153,21 @@ function CustomTabBar({ state, descriptors, navigation }) {
 // Navegação principal com tabs para Wiki e Criação de Personagem
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Wiki"
-        tabBar={(props) => <CustomTabBar {...props} />}
-        screenOptions={{ headerShown: false }}
-      >
-        <Tab.Screen name="Wiki" component={WikiDrawer} options={{ title: "Wiki" }} />
-        <Tab.Screen
-          name="Criação de Personagem"
-          component={CharacterCreationStack}
-          options={{ title: "Criação" }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <Tab.Navigator
+          initialRouteName="Wiki"
+          tabBar={(props) => <CustomTabBar {...props} />}
+          screenOptions={{ headerShown: false }}
+        >
+          <Tab.Screen name="Wiki" component={WikiDrawer} options={{ title: "Wiki" }} />
+          <Tab.Screen
+            name="Criação de Personagem"
+            component={CharacterCreationStack}
+            options={{ title: "Criação" }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }

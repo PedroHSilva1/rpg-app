@@ -1,38 +1,16 @@
 import React from "react";
-import { ScrollView, View, Text, StyleSheet } from "react-native";
-import Card from "../components/Card";
-import { globalStyles } from "../styles/globalStyles.js";
+import { ScrollView, Text } from "react-native";
+import { useTheme } from "../styles/themeContext";
 
 export default function HomeScreen() {
+  const { styles } = useTheme();
+
   return (
-    <ScrollView contentContainerStyle={globalStyles.container}>
-      <Text style={globalStyles.title}>Algumas informações</Text>
-      <Text style={globalStyles.text}>Olá. Este é um protótipo de 
-        um dociê para RPG. Para acessar as demais abas, pressione no 
-        icone no canto superior do seu smartphone.
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Algumas informações</Text>
+      <Text style={styles.text}>
+        Olá. Este é um protótipo de um dossiê para RPG. Para acessar as demais abas, pressione no ícone no canto superior do seu smartphone.
       </Text>
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    padding: 16,
-    backgroundColor: "#121212",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 16,
-    color: "#ffffff",
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 16,
-    color: "#ffffff",
-  },
-});

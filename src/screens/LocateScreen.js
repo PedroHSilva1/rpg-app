@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, View, Text, StyleSheet, Picker } from "react-native";
 import Card from "../components/Card";
-import { globalStyles } from "../styles/globalStyles.js";
+import {useTheme} from "../styles/themeContext";
 
 export default function LocateScreen() {
+  const { styles } = useTheme();
   const [locations, setLocations] = useState([]); // Estado inicial como array
   const [filter, setFilter] = useState("Todas");
 
@@ -35,17 +36,17 @@ export default function LocateScreen() {
       : locations.filter((location) => location.location === filter);
 
   return (
-    <ScrollView contentContainerStyle={globalStyles.scrollContent}
-    style={globalStyles.container}>
-      <Text style={globalStyles.title}>Localidades</Text>
+    <ScrollView contentContainerStyle={styles.scrollContent}
+    style={styles.container}>
+      <Text style={styles.title}>Localidades</Text>
 
       {/* Filtro de Localidades */}
-      <View style={globalStyles.pickerContainer}>
-        <Text style={globalStyles.label}>Filtrar por Região:</Text>
+      <View style={styles.pickerContainer}>
+        <Text style={styles.label}>Filtrar por Região:</Text>
         <Picker
           selectedValue={filter}
           onValueChange={(itemValue) => setFilter(itemValue)}
-          style={globalStyles.picker}
+          style={styles.picker}
         >
           <Picker.Item label="Todas" value="Todas" />
           {Array.isArray(locations) &&
@@ -66,7 +67,7 @@ export default function LocateScreen() {
           />
         ))
       ) : (
-        <Text style={globalStyles.noDataText}>Nenhuma localidade encontrada.</Text>
+        <Text style={styles.noDataText}>Nenhuma localidade encontrada.</Text>
       )}
     </ScrollView>
   );

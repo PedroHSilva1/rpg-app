@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
-import { globalStyles } from "../styles/globalStyles.js";
+import { useTheme } from "../styles/themeContext";
 
 export default function AttributeSelectionScreen({ route, navigation }) {
+  const { styles } = useTheme();
   const { selectedClass, selectedRace, selectedSubRace } = route.params;
   const [attributes, setAttributes] = useState({
     strength: 10,
@@ -39,32 +40,32 @@ export default function AttributeSelectionScreen({ route, navigation }) {
   };
 
   return (
-    <ScrollView contentContainerStyle={globalStyles.container}>
-      <Text style={globalStyles.title}>Distribua os Atributos</Text>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Distribua os Atributos</Text>
 
       {Object.keys(attributes).map((attr) => (
-        <View key={attr} style={globalStyles.attributeRow}>
-          <Text style={globalStyles.attributeLabel}>{attr.toUpperCase()}</Text>
-          <View style={globalStyles.buttons}>
+        <View key={attr} style={styles.attributeRow}>
+          <Text style={styles.attributeLabel}>{attr.toUpperCase()}</Text>
+          <View style={styles.buttons}>
             <TouchableOpacity
-              style={globalStyles.button}
+              style={styles.button}
               onPress={() => handleDecrement(attr)}
             >
-              <Text style={globalStyles.buttonText}>-</Text>
+              <Text style={styles.buttonText}>-</Text>
             </TouchableOpacity>
-            <Text style={globalStyles.attributeValue}>{attributes[attr]}</Text>
+            <Text style={styles.attributeValue}>{attributes[attr]}</Text>
             <TouchableOpacity
-              style={globalStyles.button}
+              style={styles.button}
               onPress={() => handleIncrement(attr)}
             >
-              <Text style={globalStyles.buttonText}>+</Text>
+              <Text style={styles.buttonText}>+</Text>
             </TouchableOpacity>
           </View>
         </View>
       ))}
 
-      <TouchableOpacity style={globalStyles.confirmButton} onPress={handleConfirm}>
-        <Text style={globalStyles.confirmButtonText}>Confirmar</Text>
+      <TouchableOpacity style={styles.confirmButton} onPress={handleConfirm}>
+        <Text style={styles.confirmButtonText}>Confirmar</Text>
       </TouchableOpacity>
     </ScrollView>
   );
