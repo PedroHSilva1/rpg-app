@@ -45,7 +45,8 @@ export default function SubRaceSelectionScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}
+    style={styles.scrollContent}>
       <Text style={styles.title}>
         Selecione uma Sub-Raça para {raceName}
       </Text>
@@ -69,10 +70,10 @@ export default function SubRaceSelectionScreen() {
       )}
 
       <TouchableOpacity
-        style={[styles.button, { marginTop: 20 }]}
+        style={[styles.confirmButton, { marginTop: 20 }]}
         onPress={() => navigation.goBack()}
       >
-        <Text style={styles.buttonText}>Voltar</Text>
+        <Text style={styles.confirmButtonText}>Voltar</Text>
       </TouchableOpacity>
     </ScrollView>
   );

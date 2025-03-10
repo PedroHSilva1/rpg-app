@@ -116,8 +116,10 @@ function WikiDrawer() {
 
 // Barra de navegação personalizada para os botões do rodapé
 function CustomTabBar({ state, descriptors, navigation }) {
+  const { styles } = useTheme();
+
   return (
-    <View style={{ flexDirection: "row", height: 50, backgroundColor: "#333", borderTopWidth: 1, borderTopColor: "#222" }}>
+    <View style={{ flexDirection: "row", height: 50, backgroundColor: styles.tabBar.backgroundColor, borderTopWidth: 1, borderTopColor: styles.tabBar.borderColor }}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label = options.title || route.name;
@@ -142,7 +144,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
             onPress={onPress}
             style={{ flex: 1, alignItems: "center", justifyContent: "center", padding: 10 }}
           >
-            <Text style={{ color: isFocused ? "#fff" : "#aaa", fontSize: 12 }}>{label}</Text>
+            <Text style={{ color: isFocused ? styles.tabBar.activeColor : styles.tabBar.inactiveColor, fontSize: 12 }}>{label}</Text>
           </TouchableOpacity>
         );
       })}

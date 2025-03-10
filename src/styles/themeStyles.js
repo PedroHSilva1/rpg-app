@@ -1,4 +1,3 @@
-// themeStyles.js
 import { StyleSheet } from "react-native";
 
 export function createGlobalStyles(theme) {
@@ -131,7 +130,7 @@ export function createGlobalStyles(theme) {
     },
     cardSubtitle: {
       fontSize: 12,
-      color: theme.subtitle,
+      color: "#cccccc",
       marginBottom: 8,
     },
     cardImage: {
@@ -142,7 +141,13 @@ export function createGlobalStyles(theme) {
     },
     cardDescription: {
       fontSize: 14,
-      color: theme.text,
+      color: "#bbbbbb",
+    },
+    tabBar: {
+      backgroundColor: theme.tabBarBg,
+      borderColor: theme.tabBarBorder,
+      activeColor: theme.tabBarActive,
+      inactiveColor: theme.tabBarInactive,
     },
   });
 }
