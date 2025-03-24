@@ -20,7 +20,7 @@ import CharacterSheetScreen from "./src/screens/CharacterSheetScreen";
 import SubRaceSelectionScreen from "./src/screens/SubRaceSelectionScreen";
 import LocateScreen from "./src/screens/LocateScreen";
 import ThemeSelectionScreen from "./src/screens/ThemeSelectionScreen";
-import SettingsScreen from "./src/screens/SettingsScreen"; // Adicione a tela de Configurações
+import SettingsScreen from "./src/screens/SettingsScreen"; 
 import SettingsButton from "./src/components/SettingsButton";
 
 const Drawer = createDrawerNavigator();
@@ -71,9 +71,8 @@ function CharacterCreationStack() {
 // Drawer navigation para telas relacionadas à Wiki com tema dinâmico
 function WikiDrawer() {
   const { styles } = useTheme();
-  const navigation = useNavigation();
 
-  return (
+  const DrawerContent = () => (
     <Drawer.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{
@@ -82,7 +81,7 @@ function WikiDrawer() {
         drawerStyle: { backgroundColor: styles.container.backgroundColor },
         drawerInactiveTintColor: styles.text.color,
         drawerActiveTintColor: styles.button.backgroundColor,
-        headerRight: () => <SettingsButton/>
+        headerRight: () => <SettingsButton />,
       }}
     >
       <Drawer.Screen
@@ -108,19 +107,28 @@ function WikiDrawer() {
       <Drawer.Screen
         name="LocateScreen"
         component={LocateScreen}
-        options={{ title: "Mundo"}}
-      />
-      <Drawer.Screen
-        name="ThemeSelectionScreen"
-        component={ThemeSelectionScreen}
-        options={{ title: "Cores" }}
-      />
-      <Drawer.Screen
-        name="SettingsScreen"
-        component={SettingsScreen}
-        options={{ title: "Configurações" }}
+        options={{ title: "Mundo" }}
       />
     </Drawer.Navigator>
+  );
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Drawer"
+        component={DrawerContent}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
   );
 }
 

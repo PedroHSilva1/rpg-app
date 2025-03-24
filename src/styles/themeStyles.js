@@ -46,10 +46,14 @@ export function createGlobalStyles(theme) {
       padding: 15,
       borderRadius: 10,
       alignItems: "center",
+      justifyContent: "center",
       marginTop: 20,
+      flexDirection: "row", // Alinha ícone e texto horizontalmente
     },
     buttonText: {
       fontSize: 16,
+      fontWeight: "bold",
+      color: theme.buttonText || "#fff", // Usa a cor do texto do botão
     },
     confirmButton: {
       marginTop: 20,
@@ -62,6 +66,10 @@ export function createGlobalStyles(theme) {
       color: "#000",
       fontSize: 18,
       fontWeight: "bold",
+    },
+    themeButton: {
+      backgroundColor: theme.secondary, // Usa a cor secundária para o botão de tema
+      paddingHorizontal: 20, // Adiciona espaçamento horizontal extra
     },
     tabContainer: {
       flexDirection: "row",

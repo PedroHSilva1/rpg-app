@@ -10,7 +10,7 @@ export default function SettingsButton() {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("SettingsScreen")}
+      onPress={() => navigation.navigate("SettingsScreen")} // Navega para a tela de configurações
       style={{ marginRight: 16 }}
     >
       <Ionicons
