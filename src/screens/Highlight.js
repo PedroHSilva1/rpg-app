@@ -1,23 +1,11 @@
 import React from "react";
-import { ScrollView, View, Text, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons"; // Certifique-se de ter o pacote @expo/vector-icons instalado
+import { ScrollView, Text, } from "react-native";
 import Card from "../components/Card";
 import { useTheme } from "../styles/themeContext";
 
 export default function Highlight() {
   const { styles } = useTheme();
-  const navigation = useNavigation();
 
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("SettingsScreen")}>
-          <Ionicons name="settings-outline" size={24} color={styles.title.color} style={{ marginRight: 16 }} />
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation, styles.title.color]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

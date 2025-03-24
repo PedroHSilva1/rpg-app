@@ -21,6 +21,7 @@ import SubRaceSelectionScreen from "./src/screens/SubRaceSelectionScreen";
 import LocateScreen from "./src/screens/LocateScreen";
 import ThemeSelectionScreen from "./src/screens/ThemeSelectionScreen";
 import SettingsScreen from "./src/screens/SettingsScreen"; // Adicione a tela de Configurações
+import SettingsButton from "./src/components/SettingsButton";
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,11 +82,7 @@ function WikiDrawer() {
         drawerStyle: { backgroundColor: styles.container.backgroundColor },
         drawerInactiveTintColor: styles.text.color,
         drawerActiveTintColor: styles.button.backgroundColor,
-        headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.navigate("SettingsScreen")}>
-            <Ionicons name="settings-outline" size={24} color={styles.title.color} style={{ marginRight: 16 }} />
-          </TouchableOpacity>
-        ),
+        headerRight: () => <SettingsButton/>
       }}
     >
       <Drawer.Screen
