@@ -141,13 +141,31 @@ export function createGlobalStyles(theme) {
     },
     cardDescription: {
       fontSize: 14,
-      color: "#bbbbbb",
+      color: theme.text,
     },
     tabBar: {
       backgroundColor: theme.tabBarBg,
       borderColor: theme.tabBarBorder,
       activeColor: theme.tabBarActive,
       inactiveColor: theme.tabBarInactive,
+    },
+    // Estilos para Login e Cadastro
+    input: {
+      backgroundColor: theme.cardBg, // Reutiliza o fundo do card
+      borderColor: theme.secondary, // Usa a cor secundária para a borda
+      borderWidth: 1,
+      borderRadius: 5,
+      padding: 10,
+      marginBottom: 15,
+      color: theme.text, // Usa a cor do texto para o conteúdo do input
+    },
+    placeholder: {
+      color: theme.text, // Usa a mesma cor do texto para o placeholder
+    },
+    link: {
+      color: theme.primary, // Usa a cor primária para os links
+      textDecorationLine: "underline",
+      marginTop: 10,
     },
   });
 }

@@ -1,9 +1,10 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, Text, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons"; // Certifique-se de ter o pacote @expo/vector-icons instalado
 import { ThemeProvider, useTheme } from "./src/styles/themeContext"; // Importação do ThemeProvider e useTheme
 
 // Importação das telas
@@ -19,6 +20,7 @@ import CharacterSheetScreen from "./src/screens/CharacterSheetScreen";
 import SubRaceSelectionScreen from "./src/screens/SubRaceSelectionScreen";
 import LocateScreen from "./src/screens/LocateScreen";
 import ThemeSelectionScreen from "./src/screens/ThemeSelectionScreen";
+import SettingsScreen from "./src/screens/SettingsScreen"; // Adicione a tela de Configurações
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -68,6 +70,7 @@ function CharacterCreationStack() {
 // Drawer navigation para telas relacionadas à Wiki com tema dinâmico
 function WikiDrawer() {
   const { styles } = useTheme();
+  const navigation = useNavigation();
 
   return (
     <Drawer.Navigator
@@ -78,6 +81,11 @@ function WikiDrawer() {
         drawerStyle: { backgroundColor: styles.container.backgroundColor },
         drawerInactiveTintColor: styles.text.color,
         drawerActiveTintColor: styles.button.backgroundColor,
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("SettingsScreen")}>
+            <Ionicons name="settings-outline" size={24} color={styles.title.color} style={{ marginRight: 16 }} />
+          </TouchableOpacity>
+        ),
       }}
     >
       <Drawer.Screen
@@ -109,6 +117,11 @@ function WikiDrawer() {
         name="ThemeSelectionScreen"
         component={ThemeSelectionScreen}
         options={{ title: "Cores" }}
+      />
+      <Drawer.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{ title: "Configurações" }}
       />
     </Drawer.Navigator>
   );

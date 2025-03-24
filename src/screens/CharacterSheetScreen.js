@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import Card from "../components/Card";
-import { icons } from "../assets/images/images.js"; // Importa os ícones do arquivo externo
+import { FontAwesome5, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../styles/themeContext.js";
 
 export default function CharacterSheetScreen() {
@@ -101,17 +101,36 @@ export default function CharacterSheetScreen() {
     }
   };
 
-   return (
+  const renderIcon = (tab) => {
+    
+    const activeColor = styles.tabBar.activeColor;
+    const inactiveColor = styles.tabBar.inactiveColor;
+    
+
+    switch (tab) {
+      case "status":
+        return <FontAwesome5 name="heartbeat" size={24} color={activeTab === tab ? activeColor : inactiveColor} />;
+      case "skills":
+        return <FontAwesome5 name="book" size={24} color={activeTab === tab ? activeColor : inactiveColor} />;
+      case "features":
+        return <MaterialIcons name="star" size={24} color={activeTab === tab ? activeColor : inactiveColor} />;
+      case "items":
+        return <FontAwesome5 name="box" size={24} color={activeTab === tab ? activeColor : inactiveColor} />;
+      case "spells":
+        return <Ionicons name="flash" size={24} color={activeTab === tab ? activeColor : inactiveColor} />;
+      default:
+        return null;
+    }
+  };
+
+  return (
     <View style={styles.container}>
       {/* Botões na parte superior */}
       <View style={styles.tabContainer}>
-        {Object.keys(icons).map((tab) => (
+        {["status", "skills", "features", "items", "spells"].map((tab) => (
           <TouchableOpacity key={tab} onPress={() => setActiveTab(tab)}>
             <View style={[styles.iconWrapper, activeTab === tab && styles.activeIconWrapper]}>
-              <Image
-                source={activeTab === tab ? icons[tab].active : icons[tab].inactive}
-                style={styles.icon}
-              />
+              {renderIcon(tab)}
             </View>
           </TouchableOpacity>
         ))}
