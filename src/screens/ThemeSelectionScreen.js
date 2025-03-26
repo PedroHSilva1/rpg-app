@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Animated } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Animated, Dimensions } from "react-native";
 import { useTheme } from "../styles/themeContext";
 import { themePalettes } from "../styles/themePallets";
 
@@ -84,20 +84,37 @@ export default function ThemeSelectionScreen() {
   const { changeTheme, styles } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(null);
 
+
+  const screenWidth = Dimensions.get("window").width;
+
   // Cria uma referência de animação para cada tema
   const animations = useRef(
-    Object.keys(themePalettes).map(() => new Animated.Value(400)) // Começa fora da tela (400px à direita)
+    Object.keys(themePalettes).map(() => new Animated.Value(screenWidth)) // Começa fora da tela (largura da tela)
   ).current;
 
   useEffect(() => {
-    // Inicia as animações em cascata
+    
     animations.forEach((animation, index) => {
-      Animated.timing(animation, {
-        toValue: 0, // Move para a posição original
-        duration: 500, // Duração da animação
-        delay: index * 100, // Atraso para criar o efeito de cascata
-        useNativeDriver: true, // Usa animações nativas para melhor desempenho
-      }).start();
+      Animated.sequence([
+       
+        Animated.timing(animation, {
+          toValue: 0, 
+          duration: 500, // Duração do movimento inicial
+          delay: index * 100, // Atraso para criar o efeito de cascata
+          useNativeDriver: true, // Usa animações nativas para melhor desempenho
+        }),
+        // Efeito de "bounce back"
+        Animated.spring(animation, {
+          toValue: 5, // Move ligeiramente além da posição final
+          friction: 3, // Controla a elasticidade
+          useNativeDriver: true,
+        }),
+        Animated.spring(animation, {
+          toValue: 0, // Volta suavemente para a posição final
+          friction: 3, // Controla a elasticidade
+          useNativeDriver: true,
+        }),
+      ]).start();
     });
   }, [animations]);
 
@@ -115,7 +132,7 @@ export default function ThemeSelectionScreen() {
           themeName={themeName}
           onPress={() => handleThemeChange(themeName)}
           isSelected={selectedTheme === themeName}
-          animation={animations[index]} // Passa a animação correspondente
+          animation={animations[index]} 
         />
       ))}
     </ScrollView>
