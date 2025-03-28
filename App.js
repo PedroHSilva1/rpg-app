@@ -1,28 +1,28 @@
 import React from "react";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, Text, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Certifique-se de ter o pacote @expo/vector-icons instalado
-import { ThemeProvider, useTheme } from "./src/styles/themeContext"; // Importação do ThemeProvider e useTheme
+import { ThemeProvider, useTheme } from "./src/styles/themeContext";
 
 // Importação das telas
+import LoginScreen from "./src/screens/LoginScreen";
+import RegisterScreen from "./src/screens/RegisterScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import Highlight from "./src/screens/Highlight";
+import SettingsScreen from "./src/screens/SettingsScreen";
 import CreaturesScreen from "./src/screens/CreaturesScreen";
 import DeitiesScreen from "./src/screens/Deities";
-import RaceSelectionScreen from "./src/screens/RaceSelectionScreen";
+import LocateScreen from "./src/screens/LocateScreen";
+import CharacterManagementScreen from "./src/screens/CharacterManagementScreen";
 import ClassSelectionScreen from "./src/screens/ClassSelectionScreen";
+import RaceSelectionScreen from "./src/screens/RaceSelectionScreen";
+import SubRaceSelectionScreen from "./src/screens/SubRaceSelectionScreen";
 import AttributeSelectionScreen from "./src/screens/AttributeSelectionScreen";
 import SkillSelectionScreen from "./src/screens/SkillSelectionScreen";
 import CharacterSheetScreen from "./src/screens/CharacterSheetScreen";
-import SubRaceSelectionScreen from "./src/screens/SubRaceSelectionScreen";
-import LocateScreen from "./src/screens/LocateScreen";
-import ThemeSelectionScreen from "./src/screens/ThemeSelectionScreen";
-import SettingsScreen from "./src/screens/SettingsScreen"; 
 import SettingsButton from "./src/components/SettingsButton";
-import CharacterManagementScreen from "./src/screens/CharacterManagementScreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,7 +34,7 @@ function CharacterCreationStack() {
     <Stack.Navigator
       initialRouteName="ClassSelectionScreen"
       screenOptions={{ headerShown: false, cardStyle: { backgroundColor: "#000" } }}
-    > 
+    >
       <Stack.Screen
         name="ClassSelectionScreen"
         component={ClassSelectionScreen}
@@ -70,10 +70,10 @@ function CharacterCreationStack() {
 }
 
 // Drawer navigation para telas relacionadas à Wiki com tema dinâmico
-function WikiDrawer() {
+const DrawerContent = () => {
   const { styles } = useTheme();
 
-  const DrawerContent = () => (
+  return (
     <Drawer.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{
@@ -112,7 +112,9 @@ function WikiDrawer() {
       />
     </Drawer.Navigator>
   );
+};
 
+function WikiDrawer() {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -133,7 +135,7 @@ function WikiDrawer() {
   );
 }
 
-// Barra de navegação personalizada para os botões do rodapé
+// Custom Tab Bar para Wiki e Fichas
 function CustomTabBar({ state, descriptors, navigation }) {
   const { styles } = useTheme();
 
@@ -171,6 +173,25 @@ function CustomTabBar({ state, descriptors, navigation }) {
   );
 }
 
+// Tab navigator para Wiki e Fichas
+function MainTabNavigator() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Wiki"
+      tabBar={(props) => <CustomTabBar {...props} />}
+      screenOptions={{ headerShown: false }}
+    >
+      <Tab.Screen name="Wiki" component={WikiDrawer} options={{ title: "Wiki" }} />
+      <Tab.Screen
+        name="Fichas"
+        component={CharacterManagementScreen}
+        options={{ title: "Fichas" }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+// Stack navigator para autenticação (Login e Cadastro)
 function AuthStack() {
   return (
     <Stack.Navigator
@@ -179,31 +200,17 @@ function AuthStack() {
     >
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-      <Stack.Screen name="HomeScreen" component={WikiDrawer} /> {/* Tela principal após login */}
+      <Stack.Screen name="MainTabNavigator" component={MainTabNavigator} />
     </Stack.Navigator>
   );
 }
 
-// Navegação principal com tabs para Wiki e Criação de Personagem
+// Navegação principal com AuthStack
 export default function App() {
   return (
     <ThemeProvider>
-    
-      
       <NavigationContainer>
-        
-        <Tab.Navigator
-          initialRouteName="Wiki"
-          tabBar={(props) => <CustomTabBar {...props} />}
-          screenOptions={{ headerShown: false }}
-        >
-          <Tab.Screen name="Wiki" component={WikiDrawer} options={{ title: "Wiki" }} />
-          <Tab.Screen
-            name="Fichas"
-            component={CharacterManagementScreen}
-            options={{ title: "Fichas" }}
-          />
-        </Tab.Navigator>
+        <AuthStack />
       </NavigationContainer>
     </ThemeProvider>
   );
