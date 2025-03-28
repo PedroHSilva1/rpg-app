@@ -98,22 +98,18 @@ export default function ThemeSelectionScreen() {
       Animated.sequence([
        
         Animated.timing(animation, {
-          toValue: 0, 
+          toValue: 2, 
           duration: 500, // Duração do movimento inicial
           delay: index * 100, // Atraso para criar o efeito de cascata
           useNativeDriver: true, // Usa animações nativas para melhor desempenho
         }),
         // Efeito de "bounce back"
         Animated.spring(animation, {
-          toValue: 5, // Move ligeiramente além da posição final
+          toValue: 0, // Move ligeiramente além da posição final
           friction: 3, // Controla a elasticidade
           useNativeDriver: true,
         }),
-        Animated.spring(animation, {
-          toValue: 0, // Volta suavemente para a posição final
-          friction: 3, // Controla a elasticidade
-          useNativeDriver: true,
-        }),
+        
       ]).start();
     });
   }, [animations]);

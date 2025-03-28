@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 
 export function createGlobalStyles(theme) {
   return StyleSheet.create({
+
+  // -------------------------
+  // CONTAINER E TÍTULOS
+  // -------------------------
     container: {
       flex: 1,
       padding: 16,
@@ -23,6 +27,10 @@ export function createGlobalStyles(theme) {
       color: theme.text,
       marginBottom: 5,
     },
+
+  // -------------------------
+  // ATRIBUTOS 
+  // -------------------------
     attributeRow: {
       flexDirection: "row",
       alignItems: "center",
@@ -37,23 +45,26 @@ export function createGlobalStyles(theme) {
       fontSize: 18,
       color: theme.text,
     },
+
+  // -------------------------
+  // BOTÕES (genéricos)
+  // -------------------------
     buttons: {
       flexDirection: "row",
       alignItems: "center",
     },
-    // Botões
     button: {
       padding: 15,
       borderRadius: 10,
       alignItems: "center",
       justifyContent: "center",
       marginTop: 20,
-      flexDirection: "row", // Alinha ícone e texto horizontalmente
+      flexDirection: "row", 
     },
     buttonText: {
       fontSize: 16,
       fontWeight: "bold",
-      color: theme.buttonText || "#fff", // Usa a cor do texto do botão
+      color: theme.buttonText || "#fff", 
     },
     confirmButton: {
       marginTop: 20,
@@ -68,14 +79,21 @@ export function createGlobalStyles(theme) {
       fontWeight: "bold",
     },
     themeButton: {
-      backgroundColor: theme.secondary, // Usa a cor secundária para o botão de tema
-      paddingHorizontal: 20, // Adiciona espaçamento horizontal extra
+      backgroundColor: theme.secondary, 
+      paddingHorizontal: 20,
     },
+
+  // -------------------------
+  // ABA INFERIOR / TABS
+  // -------------------------
     tabContainer: {
       flexDirection: "row",
       justifyContent: "space-between",
       marginBottom: 10,
     },
+  // -------------------------
+  // ÍCONES
+  // -------------------------
     iconWrapper: {
       backgroundColor: "#FFF",
       padding: 10,
@@ -88,6 +106,9 @@ export function createGlobalStyles(theme) {
       width: 50,
       height: 50,
     },
+  // -------------------------
+  // CONTEÚDO
+  // -------------------------
     contentContainer: {
       backgroundColor: theme.cardBg,
       padding: 10,
@@ -99,6 +120,10 @@ export function createGlobalStyles(theme) {
       color: theme.sectionTitle,
       marginBottom: 10,
     },
+
+  // -------------------------
+  // PICKER / LABELS
+  // -------------------------
     pickerContainer: {
       marginBottom: 16,
       backgroundColor: theme.cardBg,
@@ -113,12 +138,19 @@ export function createGlobalStyles(theme) {
     picker: {
       color: theme.text,
     },
+
+  // -------------------------
+  // ESTILOS EXTRAS
+  // -------------------------
     noDataText: {
       color: theme.text,
       fontSize: 16,
       textAlign: "center",
       marginTop: 20,
     },
+  // -------------------------
+  // ESTILOS PARA CARDS
+  // -------------------------
     card: {
       backgroundColor: theme.cardBg,
       borderRadius: 8,
@@ -157,23 +189,66 @@ export function createGlobalStyles(theme) {
       activeColor: theme.tabBarActive,
       inactiveColor: theme.tabBarInactive,
     },
-    // Estilos para Login e Cadastro
+
+  // -------------------------
+  // Estilos para Login e Cadastro
+  // -------------------------
     input: {
-      backgroundColor: theme.cardBg, // Reutiliza o fundo do card
-      borderColor: theme.secondary, // Usa a cor secundária para a borda
+      backgroundColor: theme.cardBg,
+      borderColor: theme.secondary, 
       borderWidth: 1,
       borderRadius: 5,
       padding: 10,
       marginBottom: 15,
-      color: theme.text, // Usa a cor do texto para o conteúdo do input
+      color: theme.text, 
     },
     placeholder: {
-      color: theme.text, // Usa a mesma cor do texto para o placeholder
+      color: theme.text,
     },
     link: {
-      color: theme.primary, // Usa a cor primária para os links
+      color: theme.primary, 
       textDecorationLine: "underline",
       marginTop: 10,
+    },
+
+  // -------------------------
+  // ESTILOS PARA A LISTA DE PERSONAGENS
+  // ------------------------- 
+    characterContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundColor: theme.cardBg,
+      padding: 16,
+      borderRadius: 8,
+      marginBottom: 16,
+    },
+    characterInfo: {
+      flex: 1,
+    },
+    characterText: {
+      color: theme.text,
+      fontSize: 16,
+      marginBottom: 4,
+    },
+    deleteButton: {
+      backgroundColor: theme.danger, // Use uma cor de perigo definida no tema
+      padding: 8,
+      borderRadius: 8,
+    },
+    newCharacterButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: theme.primary,
+      padding: 16,
+      borderRadius: 8,
+      marginBottom: 16,
+    },
+    newCharacterText: {
+      color: theme.buttonText,
+      fontSize: 16,
+      marginLeft: 8,
     },
   });
 }

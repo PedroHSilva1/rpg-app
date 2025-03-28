@@ -22,6 +22,7 @@ import LocateScreen from "./src/screens/LocateScreen";
 import ThemeSelectionScreen from "./src/screens/ThemeSelectionScreen";
 import SettingsScreen from "./src/screens/SettingsScreen"; 
 import SettingsButton from "./src/components/SettingsButton";
+import CharacterManagementScreen from "./src/screens/CharacterManagementScreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -170,11 +171,27 @@ function CustomTabBar({ state, descriptors, navigation }) {
   );
 }
 
+function AuthStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="LoginScreen"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+      <Stack.Screen name="HomeScreen" component={WikiDrawer} /> {/* Tela principal após login */}
+    </Stack.Navigator>
+  );
+}
+
 // Navegação principal com tabs para Wiki e Criação de Personagem
 export default function App() {
   return (
     <ThemeProvider>
+    
+      
       <NavigationContainer>
+        
         <Tab.Navigator
           initialRouteName="Wiki"
           tabBar={(props) => <CustomTabBar {...props} />}
@@ -182,9 +199,9 @@ export default function App() {
         >
           <Tab.Screen name="Wiki" component={WikiDrawer} options={{ title: "Wiki" }} />
           <Tab.Screen
-            name="Criação de Personagem"
-            component={CharacterCreationStack}
-            options={{ title: "Criação" }}
+            name="Fichas"
+            component={CharacterManagementScreen}
+            options={{ title: "Fichas" }}
           />
         </Tab.Navigator>
       </NavigationContainer>
