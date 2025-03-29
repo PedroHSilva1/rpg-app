@@ -1,6 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 export function createGlobalStyles(theme) {
+  const { width } = Dimensions.get("window");
   return StyleSheet.create({
 
   // -------------------------
@@ -249,6 +250,20 @@ export function createGlobalStyles(theme) {
       color: theme.buttonText,
       fontSize: 16,
       marginLeft: 8,
+    },
+    logoContainer: {
+      flex: 2, // Ocupa 2/3 da tela
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    logo: {
+      width: width * 0.6, // 60% da largura da tela
+      height: width * 0.6, // Mantém a proporção quadrada
+    },
+    formContainer: {
+      flex: 3, // Ocupa 1/3 da tela
+      width: "100%",
+      alignItems: "center",
     },
   });
 }

@@ -23,6 +23,7 @@ import AttributeSelectionScreen from "./src/screens/AttributeSelectionScreen";
 import SkillSelectionScreen from "./src/screens/SkillSelectionScreen";
 import CharacterSheetScreen from "./src/screens/CharacterSheetScreen";
 import SettingsButton from "./src/components/SettingsButton";
+import SplashScreen from "./src/screens/SplashScreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -195,9 +196,10 @@ function MainTabNavigator() {
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="LoginScreen"
+      initialRouteName="SplashScreen"
       screenOptions={{ headerShown: false }}
     >
+      <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
       <Stack.Screen name="MainTabNavigator" component={MainTabNavigator} />
