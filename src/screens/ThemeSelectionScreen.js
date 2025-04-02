@@ -121,7 +121,6 @@ export default function ThemeSelectionScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.container} style={styles.scrollContent}>
-      <Text style={styles.title}>Selecione um Tema</Text>
       {Object.keys(themePalettes).map((themeName, index) => (
         <ThemePreview
           key={themeName}

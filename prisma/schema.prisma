@@ -33,17 +33,18 @@ model creatures {
   id          Int    @id @default(autoincrement())
   name        String @db.VarChar(40)
   type        String @db.VarChar(6)
-  locate      String @db.VarChar(50)
+  location    String @db.VarChar(50)
   description String @db.Text
   image       Int
 }
 
 model races {
-  id           Int            @id @default(autoincrement())
-  name         String         @db.VarChar(10)
-  description  String         @db.Text
-  races_traits races_traits[]
-  subrace      subrace[]
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(10)
+  description     String            @db.Text
+  character_sheet character_sheet[]
+  races_traits    races_traits[]
+  subrace         subrace[]
 }
 
 model races_traits {
@@ -66,12 +67,13 @@ model skills {
 }
 
 model subrace {
-  id             Int              @id @default(autoincrement())
-  race_id        Int
-  name           String           @db.VarChar(35)
-  description    String           @db.Text
-  races          races            @relation(fields: [race_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "subrace_ibfk_1")
-  subrace_traits subrace_traits[]
+  id              Int               @id @default(autoincrement())
+  race_id         Int
+  name            String            @db.VarChar(35)
+  description     String            @db.Text
+  character_sheet character_sheet[]
+  races           races             @relation(fields: [race_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "subrace_ibfk_1")
+  subrace_traits  subrace_traits[]
 
   @@index([race_id], map: "race_id")
 }
@@ -84,4 +86,27 @@ model subrace_traits {
   subrace     subrace @relation(fields: [subrace_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "subrace_traits_ibfk_1")
 
   @@index([subrace_id], map: "subrace_traits_ibfk_1")
+}
+
+model character_sheet {
+  id         Int     @id @default(autoincrement())
+  race_id    Int
+  subrace_id Int
+  class_id   Int
+  char_name  String  @db.VarChar(255)
+  user_id    Int
+  races      races   @relation(fields: [race_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_1")
+  subrace    subrace @relation(fields: [subrace_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_2")
+  users      users   @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_3")
+
+  @@index([race_id], map: "race_id")
+  @@index([subrace_id], map: "subrace_id")
+  @@index([user_id], map: "user_id")
+}
+
+model users {
+  id              Int               @id @default(autoincrement())
+  email           String            @unique(map: "email") @db.VarChar(255)
+  password        String            @db.VarChar(255)
+  character_sheet character_sheet[]
 }

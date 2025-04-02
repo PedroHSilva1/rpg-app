@@ -3,6 +3,7 @@ import subraceRoutes from "./subrace.routes.js";
 import skillRoutes from "./skill.routes.js";
 import race_traitsRoutes from "./race_traits.routes.js";
 import locateRoutes from "./locate.routes.js";
+import userRoutes from "./user.routes.js";
 // Importando todas as rotas em uma única variável, para melhor organização
 
 const routes = (app) => {
@@ -11,6 +12,7 @@ const routes = (app) => {
     skillRoutes(app);
     race_traitsRoutes(app);
     locateRoutes(app);
+    userRoutes(app);
 };
 
 export default routes;

@@ -41,7 +41,7 @@ export default function SettingsScreen() {
       <Stack.Screen
         name="ThemeSelectionScreen"
         component={ThemeSelectionScreen}
-        options={{ title: "Selecionar Tema" }}
+        options={{ title: "Selecione um Tema" }}
       />
     </Stack.Navigator>
   );

@@ -132,6 +132,7 @@ function WikiDrawer() {
           headerShown: false,
         }}
       />
+       
     </Stack.Navigator>
   );
 }
@@ -180,13 +181,23 @@ function MainTabNavigator() {
     <Tab.Navigator
       initialRouteName="Wiki"
       tabBar={(props) => <CustomTabBar {...props} />}
-      screenOptions={{ headerShown: false }}
+      screenOptions={({ route }) => ({
+        headerShown: false,
+        tabBarStyle: {
+          display: route.name === "CharacterCreation" ? "none" : "flex", // Oculta a barra inferior no fluxo de criação
+        },
+      })}
     >
       <Tab.Screen name="Wiki" component={WikiDrawer} options={{ title: "Wiki" }} />
       <Tab.Screen
         name="Fichas"
         component={CharacterManagementScreen}
         options={{ title: "Fichas" }}
+      />
+      <Tab.Screen
+        name="CharacterCreation"
+        component={CharacterCreationStack}
+        options={{ title: "Criação de Personagem" }}
       />
     </Tab.Navigator>
   );
@@ -203,6 +214,7 @@ function AuthStack() {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
       <Stack.Screen name="MainTabNavigator" component={MainTabNavigator} />
+      <Stack.Screen name="CharacterCreationStack" component={CharacterCreationStack} />
     </Stack.Navigator>
   );
 }

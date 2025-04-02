@@ -19,7 +19,7 @@ export default function CharacterManagementScreen({ navigation }) {
 
   const handleCreateCharacter = () => {
     // Navega para o fluxo de criação de personagem
-    navigation.navigate("ClassSelectionScreen");
+    navigation.navigate("CharacterCreationStack");
   };
 
   const handleDeleteCharacter = async (id) => {
