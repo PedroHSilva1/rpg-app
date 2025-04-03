@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { View, Text, TouchableOpacity } from "react-native";
 import { ThemeProvider, useTheme } from "./src/styles/themeContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Importação das telas
 import LoginScreen from "./src/screens/LoginScreen";
@@ -219,8 +220,23 @@ function AuthStack() {
   );
 }
 
-// Navegação principal com AuthStack
+
 export default function App() {
+  const checkLoginStatus = async () => {
+    const token = await AsyncStorage.getItem("userToken");
+    if (token) {
+        
+        navigationRef.current?.navigate("MainTabNavigator");
+    } else {
+        
+        navigationRef.current?.navigate("LoginScreen");
+    }
+};
+
+useEffect(() => {
+    checkLoginStatus();
+}, []);
+
   return (
     <ThemeProvider>
       <NavigationContainer>

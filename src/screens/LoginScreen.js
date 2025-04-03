@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, Alert, StyleSheet, Dimensions } from "react-native";
 import { useTheme } from "../styles/themeContext";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen({ navigation }) {
   const { styles } = useTheme();
@@ -9,20 +11,37 @@ export default function LoginScreen({ navigation }) {
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert("Erro", "Por favor, preencha todos os campos.");
-      return;
+        Alert.alert("Erro", "Por favor, preencha todos os campos.");
+        window.alert("Por favor, preencha todos os campos.");
+        return;
     }
 
     try {
-      if (email === "teste@teste.com" && password === "123456") {
-        navigation.navigate("MainTabNavigator");
-      } else {
-        Alert.alert("Erro", "Credenciais inválidas.");
-      }
+        const response = await axios.post("http://localhost:3001/login", {
+            email: email,
+            password: password,
+        });
+
+        if (response.status === 200) {
+            const { token, user } = response.data;
+
+            await AsyncStorage.setItem("userToken", token);
+            await AsyncStorage.setItem("userId", user.id.toString());
+
+            navigation.navigate("MainTabNavigator");
+        }
     } catch (error) {
-      Alert.alert("Erro", "Ocorreu um erro ao fazer login.");
+        console.error("Erro ao fazer login:", error);
+
+        if (error.response && error.response.data && error.response.data.error) {
+            Alert.alert("Erro", error.response.data.error);
+            window.alert(error.response.data.error);
+        } else {
+            Alert.alert("Erro", "Ocorreu um erro ao fazer login.");
+            window.alert("Ocorreu um erro ao fazer login.");
+        }
     }
-  };
+};
 
   return (
     <View style={styles.container}>
@@ -30,7 +49,7 @@ export default function LoginScreen({ navigation }) {
         <Image
           source={require("../assets/logo.png")} // Substitua pelo caminho correto da sua logo
           style={styles.logo}
-          resizeMode="contain" // Garante que a imagem seja redimensionada proporcionalmente
+          resizeMode="contain" 
         />
       </View>
       <View style={styles.formContainer}>
