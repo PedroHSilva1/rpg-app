@@ -40,8 +40,14 @@ export const getByEmail = async (email) => {
 export const create = async (data) => {
     const newUser = await prisma.users.create({
         data,
-    });
-    return newUser;
+        select:{
+            id:true,
+            name: true,
+            email: true,
+            password: false
+        }
+    })
+    return newUser
 };
 
 export const update = async (id, data) => {

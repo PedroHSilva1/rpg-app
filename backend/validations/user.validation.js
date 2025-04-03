@@ -3,8 +3,9 @@ import { validationResult, body } from "express-validator";
 
 // Validação com Yup
 export const userValidationSchema = yup.object({
+    name: yup.string().required("O nome é obrigatório."),
     email: yup.string().required("O e-mail é obrigatório.").email("E-mail inválido."),
-    senha: yup.string().required("A senha é obrigatória.").min(6, "A senha deve ter pelo menos 6 caracteres."),
+    password: yup.string().required("A senha é obrigatória.").min(6, "A senha deve ter pelo menos 6 caracteres."),
 });
 
 // Middleware para validação com Yup
@@ -19,8 +20,9 @@ export const validateUser = async (req, res, next) => {
 
 // Middleware para sanitização com express-validator
 export const sanitizeUser = [
+    body("name").trim().escape(),
     body("email").isEmail().normalizeEmail(),
-    body("senha").trim().escape(),
+    body("password").trim().escape(),
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

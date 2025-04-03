@@ -1,6 +1,6 @@
 import { getAll, getById, getByEmail, create, update, remove } from "../repositories/user.repository.js";
 import { validateUser, sanitizeUser } from "../validations/user.validation.js";
-
+import bcrypt from "bcrypt"
 
 export const get = async (req, res) => {
     try {
@@ -40,6 +40,9 @@ export const createUser = [
     validateUser, 
     async (req, res) => {
         try {
+            const hashPassword = await bcrypt.hash(req.body.password, 10);
+            req.body.password = hashPassword;
+
             const newUser = await create(req.body);
             res.status(201).send(newUser);
         } catch (e) {
@@ -53,6 +56,10 @@ export const updateUser = [
     validateUser,
     async (req, res) => {
         try {
+            if (req.body.password) {
+                const hashPassword = await bcrypt.hash(req.body.senha, 10);
+                req.body.password = hashPassword;
+            }
             const updatedUser = await update(Number(req.params.id), req.body);
             res.status(200).send(updatedUser);
         } catch (e) {
