@@ -13,6 +13,8 @@ export default function LoginScreen({ navigation }) {
     if (!email || !password) {
         Alert.alert("Erro", "Por favor, preencha todos os campos.");
         window.alert("Por favor, preencha todos os campos.");
+        setEmail("");
+        setPassword("");
         return;
     }
 
@@ -32,6 +34,8 @@ export default function LoginScreen({ navigation }) {
         }
     } catch (error) {
         console.error("Erro ao fazer login:", error);
+        setEmail("");
+        setPassword("");
 
         if (error.response && error.response.data && error.response.data.error) {
             Alert.alert("Erro", error.response.data.error);
