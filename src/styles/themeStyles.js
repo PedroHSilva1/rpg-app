@@ -67,15 +67,29 @@ export function createGlobalStyles(theme) {
       fontWeight: "bold",
       color: theme.buttonText || "#fff", 
     },
+    cancelButton: {
+      flex: 1,
+      marginRight: 10,
+      padding: 10,
+      backgroundColor: theme.cardBg,
+      borderRadius: 5,
+      alignItems: "center",
+    },
+    cancelButtonText: {
+      color: theme.text,
+      fontSize: 18,
+      fontWeight: "bold",
+    },
     confirmButton: {
-      marginTop: 20,
-      padding: 15,
-      backgroundColor: theme.secondary,
+      flex: 1,
+      marginTop: 10,
+      padding: 10,
+      backgroundColor: theme.primary,
       borderRadius: 5,
       alignItems: "center",
     },
     confirmButtonText: {
-      color: "#000",
+      color: theme.text,
       fontSize: 18,
       fontWeight: "bold",
     },
@@ -264,6 +278,36 @@ export function createGlobalStyles(theme) {
       flex: 3, // Ocupa 1/3 da tela
       width: "100%",
       alignItems: "center",
+    },
+    modalOverlay: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    modalContainer: {
+      width: "80%",
+      backgroundColor: theme.background,
+      borderRadius: 10,
+      padding: 20,
+      alignItems: "center",
+    },
+    modalTitle: {
+      fontSize: 18,
+      fontWeight: "bold",
+      marginBottom: 10,
+      color: theme.text,
+    },
+    modalMessage: {
+      fontSize: 16,
+      textAlign: "center",
+      marginBottom: 20,
+      color: theme.text,
+    },
+    modalButtons: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      width: "100%",
     },
   });
 }

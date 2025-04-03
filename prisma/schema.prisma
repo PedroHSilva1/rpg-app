@@ -15,10 +15,11 @@ model attributes {
 }
 
 model classes {
-  id          Int    @id @default(autoincrement())
-  name        String @db.VarChar(20)
-  description String @db.Text
-  traits      String @db.Text
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(20)
+  description     String            @db.Text
+  traits          String            @db.Text
+  character_sheet character_sheet[]
 }
 
 model locates {
@@ -98,10 +99,12 @@ model character_sheet {
   races      races   @relation(fields: [race_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_1")
   subrace    subrace @relation(fields: [subrace_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_2")
   users      users   @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_3")
+  classes    classes @relation(fields: [class_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_4")
 
   @@index([race_id], map: "race_id")
   @@index([subrace_id], map: "subrace_id")
   @@index([user_id], map: "user_id")
+  @@index([class_id], map: "class_id")
 }
 
 model users {
