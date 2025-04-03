@@ -5,6 +5,7 @@ import race_traitsRoutes from "./race_traits.routes.js";
 import locateRoutes from "./locate.routes.js";
 import userRoutes from "./user.routes.js";
 import deitiesRoutes from "./deities.routes.js";
+import creaturesRoutes from "./creatures.routes.js";
 // Importando todas as rotas em uma única variável, para melhor organização
 
 const routes = (app) => {
@@ -15,6 +16,7 @@ const routes = (app) => {
     locateRoutes(app);
     userRoutes(app);
     deitiesRoutes(app);
+    creaturesRoutes(app);
 };
 
 export default routes;
