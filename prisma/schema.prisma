@@ -111,3 +111,10 @@ model users {
   name            String            @db.VarChar(255)
   character_sheet character_sheet[]
 }
+
+model deities {
+  id          Int    @id @default(autoincrement())
+  name        String @db.VarChar(255)
+  image_path  String @db.VarChar(255)
+  description String @db.Text
+}

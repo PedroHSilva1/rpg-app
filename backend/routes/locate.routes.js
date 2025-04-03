@@ -1,4 +1,4 @@
-import { get, getId } from "../controllers/locate.repository.js";
+import { get, getId } from "../controllers/locate.controllers.js";
 
 const locateRoutes = app => {
     app.get("/locates", get);  

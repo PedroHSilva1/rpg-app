@@ -10,25 +10,11 @@ export const raceImages = {
     9: require('./racesImages/tiefling.jpg'),
   };
 
-export const icons = {
-  status: {
-    active: require("./icons/swords.gif"),
-    inactive: require("./icons/swords.png"),
-  },
-  skills: {
-    active: require("./icons/line-chart.gif"),
-    inactive: require("./icons/line-chart.png"),
-  },
-  features: {
-    active: require("./icons/clipboard.gif"),
-    inactive: require("./icons/clipboard.png"),
-  },
-  items: {
-    active: require("./icons/backpack.gif"),
-    inactive: require("./icons/backpack.png"),
-  },
-  spells: {
-    active: require("./icons/old-scroll.gif"),
-    inactive: require("./icons/old-scroll.png"),
-  },
+export const deitiesImages = {
+    1: require('./godImages/Lumini.jpg'),
+    2: require('./godImages/Endrius.jpg'),
+    3: require('./godImages/Coradia.jpg'),
+    4: require('./godImages/Ignascia.jpg'),
+    5: require('./godImages/Zephyria.jpg'),
+    
 };

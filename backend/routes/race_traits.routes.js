@@ -1,4 +1,4 @@
-import { get, getId, getIdrace } from "../controllers/race_traits.repository.js";
+import { get, getId, getIdrace } from "../controllers/race_traits.controllers.js";
 
 const race_traitsRoutes = app => {
     app.get("/race_trait", get);  
