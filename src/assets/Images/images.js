@@ -18,3 +18,22 @@ export const deitiesImages = {
     5: require('./godImages/Zephyria.jpg'),
     
 };
+
+export const creaturesImages = {
+    1: require('./creatureImages/Manticora.jpg'),
+    2: require('./creatureImages/GolemRadiante.jpg'),
+    3: require('./creatureImages/CoelhoUni.jpg'),
+    4: require('./creatureImages/CervoMist.jpg'),
+    5: require('./creatureImages/SlimeDourado.jpg'),
+    6: require('./creatureImages/SerpieVulcanica.jpg'),
+    7: require('./creatureImages/ElementalMenor.jpg'),
+    8: require('./creatureImages/carangueijoPintor.jpg'),
+    9: require('./creatureImages/PeixeArcano.jpg'),
+    11: require('./creatureImages/wendigo.jpg'),    
+    12: require('./creatureImages/ElementalGelo.jpg'),
+    13: require('./creatureImages/Tubaraogelo.jpg'),
+    14: require('./creatureImages/DragaoGelo.jpg'),
+    15: require('./creatureImages/Nevil.jpg'),
+    16: require('./creatureImages/Alce.jpg'),
+    17: require('./creatureImages/Bufalo.jpg'),
+};
