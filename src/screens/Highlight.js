@@ -16,7 +16,6 @@ export default function Highlight() {
       />
       <Card
         title="Lumini, Deusa da Luz"
-        image={require("../assets/images/godImages/Lumini.jpg")}
         description={` Lumini é aquela que traz a luz para o mundo dos mortais.\n\n Cada nascer do dia carrega um sorriso alegre e contagiante da Deusa.\n\n Além de trazer a luz ao mundo, ela também tem a função de iluminar o caminho dos perdidos, trazer felicidade ao mundo humano e combater as criaturas da noite que habitam no submundo.`}
       />
     </ScrollView>
