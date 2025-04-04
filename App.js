@@ -31,6 +31,24 @@ const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+function CharacterManagementStack() {
+  return (
+    <Stack.Navigator initialRouteName="CharacterManagementScreen"
+    screenOptions={{ headerShown: false, cardStyle: { backgroundColor: "#000" } }}>
+      <Stack.Screen
+        name="CharacterManagementScreen"
+        component={CharacterManagementScreen}
+        options={{ title: "Gerenciamento de Personagens" }}
+      />
+      <Stack.Screen
+        name="CharacterSheetScreen"
+        component={CharacterSheetScreen}
+        options={{ title: "Ficha de Personagem" }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 // Stack navigator para o fluxo de criação de personagem
 function CharacterCreationStack() {
   return (
@@ -203,7 +221,7 @@ function MainTabNavigator() {
       <Tab.Screen name="Wiki" component={WikiDrawer} options={{ title: "Wiki" }} />
       <Tab.Screen
         name="Fichas"
-        component={CharacterManagementScreen}
+        component={CharacterManagementStack}
         options={{ title: "Fichas" }}
       />
       <Tab.Screen

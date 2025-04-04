@@ -5,7 +5,7 @@ import { useTheme } from "../styles/themeContext";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function CharacterManagementScreen() {
+export default function CharacterManagementScreen({ navigation }) {
   const { styles } = useTheme();
   const [characters, setCharacters] = useState([]);
   const [userId, setUserId] = useState(null);
@@ -30,42 +30,53 @@ export default function CharacterManagementScreen() {
 
   const fetchCharacters = async () => {
     try {
-        const response = await axios.get("http://localhost:3001/characters");
+      const response = await axios.get("http://localhost:3001/characters");
 
-        // Verifique se o userId está definido antes de filtrar
-        if (!userId) {
-            console.error("Erro: userId não está definido.");
-            return;
+      if (!userId) {
+        console.error("Erro: userId não está definido.");
+        return;
+      }
+
+      const userCharacters = response.data.filter((character) => {
+        if (!character.user_id) {
+          console.error("Erro: character.user_id não está definido para o personagem:", character);
+          return false;
         }
+        return character.user_id.toString() === userId.toString();
+      });
 
-        const userCharacters = response.data.filter((character) => {
-            // Verifique se character.user_id está definido antes de usar toString()
-            if (!character.user_id) {
-                console.error("Erro: character.user_id não está definido para o personagem:", character);
-                return false;
-            }
-            return character.user_id.toString() === userId.toString();
-        });
-
-        setCharacters(userCharacters);
+      setCharacters(userCharacters);
     } catch (error) {
-        console.error("Erro ao buscar personagens:", error);
+      console.error("Erro ao buscar personagens:", error);
     }
-};
+  };
 
   const handleDeleteCharacter = async () => {
     try {
       await axios.delete(`http://localhost:3001/characters/${characterToDelete}`);
       setCharacters((prev) => prev.filter((char) => char.id !== characterToDelete));
-      setModalVisible(false); // Fecha o modal após a exclusão
-      setCharacterToDelete(null); // Reseta o personagem a ser deletado
+      setModalVisible(false);
+      setCharacterToDelete(null);
     } catch (error) {
       console.error("Erro ao deletar personagem:", error);
     }
   };
 
+  const handleCharacterPress = (character) => {
+    navigation.navigate("CharacterSheetScreen", {
+      characterId: character.id,
+      raceId: character.race_id, 
+      subRaceId: character.subrace_id || null, 
+      classId: character.class_id, 
+      attributes: character.attributes,
+    });
+  };
+
   const renderCharacter = ({ item }) => (
-    <View style={styles.characterContainer}>
+    <TouchableOpacity
+      style={styles.characterContainer}
+      onPress={() => handleCharacterPress(item)} // Navega para a tela de ficha do personagem
+    >
       <View style={styles.characterInfo}>
         <Text style={styles.characterText}>Nome: {item.char_name}</Text>
         <Text style={styles.characterText}>Raça: {item.races?.name || "N/A"}</Text>
@@ -75,13 +86,13 @@ export default function CharacterManagementScreen() {
       <TouchableOpacity
         style={styles.deleteButton}
         onPress={() => {
-          setCharacterToDelete(item.id); // Define o personagem a ser deletado
-          setModalVisible(true); // Abre o modal
+          setCharacterToDelete(item.id);
+          setModalVisible(true);
         }}
       >
         <Ionicons name="trash" size={24} color="white" />
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -100,7 +111,7 @@ export default function CharacterManagementScreen() {
         visible={modalVisible}
         transparent
         animationType="fade"
-        onRequestClose={() => setModalVisible(false)} // Fecha o modal ao clicar fora
+        onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
@@ -111,13 +122,14 @@ export default function CharacterManagementScreen() {
             <View style={styles.modalButtons}>
               <TouchableOpacity
                 style={styles.cancelButton}
-                onPress={() => setModalVisible(false)} // Fecha o modal
+                onPress={() => setModalVisible(false)}
               >
                 <Text style={styles.cancelButtonText}>Cancelar</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.confirmButton}
-                onPress={handleDeleteCharacter}>
+                onPress={handleDeleteCharacter}
+              >
                 <Text style={styles.confirmButtonText}>Deletar</Text>
               </TouchableOpacity>
             </View>

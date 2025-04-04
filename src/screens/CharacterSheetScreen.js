@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import axios from "axios";
 import Card from "../components/Card";
 import { FontAwesome5, MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../styles/themeContext.js";
@@ -8,11 +9,27 @@ import { useTheme } from "../styles/themeContext.js";
 export default function CharacterSheetScreen() {
   const { styles } = useTheme();
   const route = useRoute();
-  const { raceId, raceName, subRaceId, subRaceName } = route.params;
+  const { characterId } = route.params; // Recebe o ID do personagem da tela anterior
+  const [characterData, setCharacterData] = useState(null); // Armazena os dados do personagem
   const [activeTab, setActiveTab] = useState("status");
   const [skills, setSkills] = useState([]);
   const [features, setFeatures] = useState([]);
 
+  // Busca os dados do personagem ao carregar a tela
+  useEffect(() => {
+    const fetchCharacterData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/characters/${characterId}`);
+        setCharacterData(response.data); // Armazena os dados do personagem
+      } catch (error) {
+        console.error("Erro ao buscar os dados do personagem:", error);
+      }
+    };
+
+    fetchCharacterData();
+  }, [characterId]);
+
+  // Busca as skills ou features dependendo da aba ativa
   useEffect(() => {
     if (activeTab === "skills") {
       fetchSkills();
@@ -23,9 +40,8 @@ export default function CharacterSheetScreen() {
 
   const fetchSkills = async () => {
     try {
-      const response = await fetch("http://localhost:3001/skill");
-      const data = await response.json();
-      setSkills(data);
+      const response = await axios.get("http://localhost:3001/skill");
+      setSkills(response.data); // Armazena as habilidades retornadas pelo backend
     } catch (error) {
       console.error("Erro ao buscar skills:", error);
     }
@@ -33,15 +49,20 @@ export default function CharacterSheetScreen() {
 
   const fetchFeatures = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/race_trait/race/${raceId}`);
-      const data = await response.json();
-      setFeatures(data);
+      if (characterData?.races?.id) {
+        const response = await axios.get(`http://localhost:3001/race_trait/race/${characterData.races.id}`);
+        setFeatures(response.data); // Armazena as características retornadas pelo backend
+      }
     } catch (error) {
       console.error("Erro ao buscar features:", error);
     }
   };
 
   const renderContent = () => {
+    if (!characterData) {
+      return <Text style={styles.text}>Carregando dados do personagem...</Text>;
+    }
+
     switch (activeTab) {
       case "status":
         return (
@@ -73,10 +94,10 @@ export default function CharacterSheetScreen() {
             <Text style={styles.sectionTitle}>Características</Text>
             {features.length > 0 ? (
               features.map((feature) => (
-                <Card key={feature.id} title={feature.name} subtitle={raceName} description={feature.description} />
+                <Card key={feature.id} title={feature.name} description={feature.description} />
               ))
             ) : (
-              <Text style={styles.text}></Text>
+              <Text style={styles.text}>Nenhuma característica encontrada.</Text>
             )}
           </ScrollView>
         );
@@ -102,10 +123,8 @@ export default function CharacterSheetScreen() {
   };
 
   const renderIcon = (tab) => {
-    
     const activeColor = styles.tabBar.activeColor;
     const inactiveColor = styles.tabBar.inactiveColor;
-    
 
     switch (tab) {
       case "status":
@@ -136,9 +155,7 @@ export default function CharacterSheetScreen() {
         ))}
       </View>
 
-      
       <ScrollView style={styles.contentContainer}>{renderContent()}</ScrollView>
     </View>
   );
 }
-
