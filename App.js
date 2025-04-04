@@ -25,6 +25,7 @@ import SkillSelectionScreen from "./src/screens/SkillSelectionScreen";
 import CharacterSheetScreen from "./src/screens/CharacterSheetScreen";
 import SettingsButton from "./src/components/SettingsButton";
 import SplashScreen from "./src/screens/SplashScreen";
+import CharacterConfirmationScreen from "./src/screens/CharacterConfirmationScreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,6 +62,16 @@ function CharacterCreationStack() {
         name="SkillSelectionScreen"
         component={SkillSelectionScreen}
         options={{ title: "Escolha Perícias" }}
+      />
+      <Stack.Screen
+        name="CharacterConfirmationScreen"
+        component={CharacterConfirmationScreen}
+        options={{ title: "Confirmação de Personagem" }}
+      />
+      <Stack.Screen
+        name="CharacterManagementScreen"
+        component={CharacterManagementScreen}
+        options={{ title: "Gerenciamento de Personagens" }}
       />
       <Stack.Screen
         name="CharacterSheetScreen"

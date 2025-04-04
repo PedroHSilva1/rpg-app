@@ -92,12 +92,13 @@ model subrace_traits {
 model character_sheet {
   id         Int     @id @default(autoincrement())
   race_id    Int
-  subrace_id Int
+  subrace_id Int?
   class_id   Int
   char_name  String  @db.VarChar(255)
   user_id    Int
+  attributes String  @db.LongText
   races      races   @relation(fields: [race_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_1")
-  subrace    subrace @relation(fields: [subrace_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_2")
+  subrace    subrace? @relation(fields: [subrace_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_2")
   users      users   @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_3")
   classes    classes @relation(fields: [class_id], references: [id], onUpdate: Restrict, map: "character_sheet_ibfk_4")
 

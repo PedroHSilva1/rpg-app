@@ -53,7 +53,7 @@ export default function AttributeSelectionScreen({ route, navigation }) {
   };
 
   const handleConfirm = () => {
-    navigation.navigate("SkillSelectionScreen", {
+    navigation.navigate("CharacterConfirmationScreen", {
       selectedRace,
       selectedSubRace,
       selectedClass,

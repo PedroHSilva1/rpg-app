@@ -6,9 +6,9 @@ export const getAll = async () => {
             id: true,
             char_name: true,
             user_id: true,
-            races: { select: { name: true } }, // Corrigido de 'race' para 'races'
+            races: { select: { name: true } }, 
             subrace: { select: { name: true } },
-            classes: { select: { name: true } }, // Não há relacionamento direto com 'class', então use 'class_id'
+            classes: { select: { name: true } }, 
         },
     });
     return characters;
@@ -21,9 +21,10 @@ export const getById = async (id) => {
             id: true,
             char_name: true,
             user_id: true,
-            races: { select: { name: true } }, // Corrigido de 'race' para 'races'
+            races: { select: { name: true } }, 
             subrace: { select: { name: true } },
-            classes: { select: { name: true } }, // Não há relacionamento direto com 'class', então use 'class_id'
+            classes: { select: { name: true } }, 
+            attributes: true,
         },
     });
     return character;
@@ -31,7 +32,14 @@ export const getById = async (id) => {
 
 export const create = async (data) => {
     const newCharacter = await prisma.character_sheet.create({
-        data,
+        data: {
+            char_name: data.char_name,
+            race_id: data.race_id,
+            subrace_id: data.subrace_id,
+            class_id: data.class_id,
+            user_id: parseInt(data.user_id, 10), 
+            attributes: JSON.stringify(data.attributes),
+          },
     });
     return newCharacter;
 };
