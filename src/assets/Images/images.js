@@ -37,3 +37,8 @@ export const creaturesImages = {
     16: require('./creatureImages/Alce.jpg'),
     17: require('./creatureImages/Bufalo.jpg'),
 };
+
+export const classesImages = {
+    1: require('./classImages/guerreiro.jpg'),
+    2: require('./classImages/mago.jpg'),
+}

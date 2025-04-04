@@ -7,6 +7,7 @@ import userRoutes from "./user.routes.js";
 import deitiesRoutes from "./deities.routes.js";
 import creaturesRoutes from "./creatures.routes.js";
 import characterRoutes from "./character_sheet.routes.js";
+import classesRoutes from "./classes.routes.js";
 // Importando todas as rotas em uma única variável, para melhor organização
 
 const routes = (app) => {
@@ -19,6 +20,7 @@ const routes = (app) => {
     deitiesRoutes(app);
     creaturesRoutes(app);
     characterRoutes(app);
+    classesRoutes(app);
 };
 
 export default routes;
