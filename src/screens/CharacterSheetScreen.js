@@ -49,12 +49,19 @@ export default function CharacterSheetScreen() {
 
   const fetchFeatures = async () => {
     try {
-      if (characterData?.races?.id) {
-        const response = await axios.get(`http://localhost:3001/race_trait/race/${characterData.races.id}`);
-        setFeatures(response.data); // Armazena as características retornadas pelo backend
-      }
+        const raceTraits = characterData?.race_id
+            ? await axios.get(`http://localhost:3001/race_trait/race/${characterData.race_id}`).then(res => res.data)
+            : [];
+        
+        const subRaceTraits = characterData?.subrace_id
+            ? await axios.get(`http://localhost:3001/subraces/race/${characterData.subrace_id}`).then(res => res.data)
+            : [];
+
+        const combinedFeatures = [...raceTraits, ...subRaceTraits];
+        console.log("Características combinadas:", combinedFeatures);
+        setFeatures(combinedFeatures);
     } catch (error) {
-      console.error("Erro ao buscar features:", error);
+        console.error("Erro ao buscar características:", error);
     }
   };
 
@@ -88,19 +95,23 @@ export default function CharacterSheetScreen() {
             )}
           </View>
         );
-      case "features":
-        return (
-          <ScrollView>
-            <Text style={styles.sectionTitle}>Características</Text>
-            {features.length > 0 ? (
-              features.map((feature) => (
-                <Card key={feature.id} title={feature.name} description={feature.description} />
-              ))
-            ) : (
-              <Text style={styles.text}>Nenhuma característica encontrada.</Text>
-            )}
-          </ScrollView>
-        );
+        case "features":
+  return (
+    <ScrollView>
+      <Text style={styles.sectionTitle}>Características</Text>
+      {features.length > 0 ? (
+        features.map((feature) => (
+          <Card
+            key={feature.id}
+            title={` ${feature.name}`}
+            description={feature.description}
+          />
+        ))
+      ) : (
+        <Text style={styles.text}>Nenhuma característica encontrada.</Text>
+      )}
+    </ScrollView>
+  );
       case "items":
         return (
           <View>
@@ -144,7 +155,7 @@ export default function CharacterSheetScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Botões na parte superior */}
+     
       <View style={styles.tabContainer}>
         {["status", "skills", "features", "items", "spells"].map((tab) => (
           <TouchableOpacity key={tab} onPress={() => setActiveTab(tab)}>
