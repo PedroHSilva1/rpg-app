@@ -9,7 +9,7 @@ export default function SubRaceSelectionScreen() {
   const [subRaces, setSubRaces] = useState([]);
   const route = useRoute();
   const navigation = useNavigation();
-  const { raceId, raceName } = route.params; // Pegamos os parâmetros passados
+  const { raceId, raceName, selectedRace, selectedClass } = route.params; // Pegamos os parâmetros passados
 
   useEffect(() => {
     const fetchSubRaces = async () => {
@@ -25,15 +25,15 @@ export default function SubRaceSelectionScreen() {
     fetchSubRaces();
   }, [raceId]);
 
-  // Função para selecionar uma sub-raça e navegar para CharacterSheetScreen
+ 
   const handleSubRaceSelection = async (subRace) => {
     try {
-      // Buscar os dados completos da raça (opcional, caso precise de mais detalhes)
-      const response = await fetch(`http://localhost:3001/races/${raceId}`);
-      const raceData = await response.json();
 
-      // Navegar para a tela de ficha do personagem
-      navigation.navigate("CharacterSheetScreen", {
+      // Navegar para a tela de seleção de atributos
+      navigation.navigate("AttributeSelectionScreen", {
+        selectedClass,
+        selectedRace,
+        selectedSubRace: subRace,
         raceId: raceId,
         raceName: raceName,
         subRaceId: subRace.id,

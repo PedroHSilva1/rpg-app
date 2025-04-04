@@ -5,10 +5,11 @@ import Card from "../components/Card";
 import { raceImages } from "../assets/images/images";
 import {useTheme} from "../styles/themeContext";
 
-export default function RaceSelectionScreen() {
+export default function RaceSelectionScreen({ route, navigation }) {
   const { styles } = useTheme();
   const [races, setRaces] = useState([]);
-  const navigation = useNavigation();
+
+  const { selectedClass } = route.params;
 
   useEffect(() => {
     const fetchRaces = async () => {
@@ -32,12 +33,17 @@ export default function RaceSelectionScreen() {
       if (data.length > 0) {
         // Navegar para a tela de sub-raças
         navigation.navigate("SubRaceSelectionScreen", {
+          selectedClass,
+          selectedRace: race,
           raceId: race.id,
           raceName: race.name,
         });
       } else {
-        // Sem sub-raças, ir direto para a ficha
-        navigation.navigate("CharacterSheetScreen", {
+        // Sem sub-raças, ir direto para a seleção de atributos
+        navigation.navigate("AttributeSelectionScreen", {
+          selectedClass,
+          selectedRace: race,
+          selectedSubRace: null,
           raceId: race.id,
           raceName: race.name,
         });

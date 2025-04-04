@@ -279,6 +279,11 @@ export function createGlobalStyles(theme) {
       width: "100%",
       alignItems: "center",
     },
+
+  // -------------------------
+  // ESTILOS PARA O MODAL DE CONFIRMAÇÃO
+  // ------------------------- 
+
     modalOverlay: {
       flex: 1,
       justifyContent: "center",
@@ -309,5 +314,42 @@ export function createGlobalStyles(theme) {
       justifyContent: "space-between",
       width: "100%",
     },
+
+  // -------------------------
+  // ESTILOS PARA SELEÇÃO DE ATRIBUTOS
+  // ------------------------- 
+
+    attributeRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 15,
+      padding: 10,
+      backgroundColor: theme.cardBg, // Fundo do card de atributo
+      borderRadius: 8,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 3,
+    },
+    attributeLabel: {
+      fontSize: 18,
+      fontWeight: "bold",
+      color: theme.text,
+    },
+    attributeValue: {
+      fontSize: 18,
+      fontWeight: "bold",
+      color: theme.primary, 
+    },
+    remainingPoints: {
+      fontSize: 20,
+      fontWeight: "bold",
+      color: theme.secondary, 
+      textAlign: "center",
+      marginBottom: 20,
+    },
+
   });
 }
